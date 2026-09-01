@@ -69,7 +69,7 @@ const projectsData = [
             "image/neon-outpost/Screenshot 2026-08-31 144614.png",
             "image/neon-outpost/Screenshot 2026-08-31 144630.png"
         ],
-        video: "image/neon-outpost/lv_0_20260831151245.mp4",
+        video: "image/neon-outpost/neon.mp4",
         playUrl: "https://neon-outpost-by-jesce.pages.dev/",
         playLabel: "PLAY THIS GAME",
         githubUrl: "https://github.com/jessiejames1234",
