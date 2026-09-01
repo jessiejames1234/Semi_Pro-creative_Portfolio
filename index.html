@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessie James C. Parajes | Portfolio</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23059669'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='55' font-weight='bold' fill='white' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+            }
+        }
+    </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#059669',
+                            DEFAULT: '#059669', // Unified portfolio green
+                            dark: '#059669',
+                        },
+                        surface: {
+                            light: '#f3f4f4',
+                            dark: '#000000',
+                        },
+                        card: {
+                            light: '#fafafa',
+                            dark: '#1e293b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+    <link rel="stylesheet" href="css/style.css?v=20260831-30">
+</head>
+<body class="bg-surface-light dark:bg-surface-dark text-slate-800 dark:text-slate-200 font-sans antialiased overflow-x-hidden transition-colors duration-500">
+
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-72 md:w-96 h-72 md:h-96 bg-brand/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-1/3 w-72 md:w-96 h-72 md:h-96 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5 px-6 lg:px-24 border-b border-transparent">
+        <div class="scroll-progress-track" aria-hidden="true">
+            <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+        </div>
+        <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <a href="#" class="text-2xl font-heading font-bold text-slate-900 dark:text-white tracking-wider group">
+                JESSIE<span class="text-brand transition-colors duration-300 group-hover:text-brand-light">.DEV</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="image/resume/Resume.pdf" download class="nav-resume-button" aria-label="Download resume PDF">
+                    Resume <i class="fa-solid fa-download" aria-hidden="true"></i>
+                </a>
+                
+                <button id="theme-toggle" class="theme-toggle-control p-2 rounded-full transition-all duration-300" aria-label="Switch color theme">
+                    <i id="theme-icon" class="fa-solid fa-moon w-5 h-5 flex items-center justify-center"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex md:hidden items-center gap-2 mobile-nav-controls">
+                <button id="theme-toggle-mobile" class="theme-toggle-control p-2 rounded-full transition-all duration-300" aria-label="Switch color theme">
+                    <i id="theme-icon-mobile" class="fa-solid fa-moon w-5 h-5 flex items-center justify-center"></i>
+                </button>
+                <button id="menu-toggle" class="p-2 rounded-lg focus:outline-none text-slate-700 dark:text-slate-300" aria-label="Toggle menu">
+                    <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+            <div class="flex flex-col space-y-2 bg-card-light dark:bg-card-dark rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl p-4">
+                <a href="#about" class="mobile-nav-link">About</a>
+                <a href="#skills" class="mobile-nav-link">Skills</a>
+                <a href="#projects" class="mobile-nav-link">Projects</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+                <a href="image/resume/Resume.pdf" download class="mobile-nav-link mobile-nav-resume" aria-label="Download resume PDF">
+                    Resume <i class="fa-solid fa-download" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center relative z-10 px-6 pt-20">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div class="stagger-element">
+                <!-- Mobile Profile Image (Floating at top) -->
+                <div class="lg:hidden flex justify-center mb-6 stagger-element" data-profile-tilt>
+                    <div class="animate-float">
+                        <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-dashed border-slate-300 dark:border-slate-700 p-2.5 relative" data-profile-tilt-target>
+                            <div class="profile-crawler-stage profile-crawler-stage-mobile" data-crawler-stage aria-hidden="true"></div>
+                            <div class="profile-photo-layer w-full h-full rounded-full overflow-hidden shadow-xl border-4 border-white dark:border-slate-900">
+                                <img src="image/profile/sample2.jpg" alt="Jessie James" class="w-full h-full object-cover">
+                            </div>
+                            <div class="profile-crawler-grip-stage profile-crawler-stage-mobile" data-crawler-grip-stage aria-hidden="true"></div>
+                            <div class="absolute -top-1 -right-1 w-7 h-7 bg-white dark:bg-slate-800 rounded-full shadow flex items-center justify-center text-blue-500 text-xs border border-slate-100 dark:border-slate-700">
+                                <i class="fa-brands fa-react"></i>
+                            </div>
+                            <div class="absolute -bottom-1 -left-1 w-7 h-7 bg-white dark:bg-slate-800 rounded-full shadow flex items-center justify-center text-purple-600 text-xs border border-slate-100 dark:border-slate-700">
+                                <i class="fa-brands fa-php"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-heading font-extrabold text-slate-900 dark:text-white mb-4 md:mb-6 leading-tight text-center lg:text-left">
+                    Hi, I'm <span class="text-brand">Jessie James.</span>
+                </h1>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-heading font-semibold text-slate-700 dark:text-slate-300 mb-4 md:mb-6 h-10 text-center lg:text-left">
+                    I specialize in <span id="typewriter" class="text-brand border-r-4 border-brand pr-1"></span>
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg mb-8 md:mb-10 max-w-xl leading-relaxed text-center lg:text-left mx-auto lg:mx-0">
+                    A versatile Information Technology student blending full stack development with multimedia skills. Experienced in building robust web applications, immersive games, and digital assets.
+                </p>
+                <div class="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
+                    <a href="#projects" class="portfolio-button portfolio-button-primary px-6 md:px-8 py-3 md:py-4 bg-brand text-white rounded-lg font-medium transition-all active:scale-95 flex items-center gap-2 text-sm md:text-base">
+                        View Projects <i class="fa-solid fa-arrow-right text-sm md:text-base"></i>
+                    </a>
+                    <a href="#contact" class="portfolio-button portfolio-button-secondary px-6 md:px-8 py-3 md:py-4 bg-transparent border-2 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white rounded-lg font-medium transition-all active:scale-95 text-sm md:text-base">
+                        Contact Me
+                    </a>
+                </div>
+                
+                <div class="mt-8 md:mt-12 flex gap-5 md:gap-6 justify-center lg:justify-start">
+                    <a href="https://github.com/jessiejames1234" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com/in/jessie-james-parajes-81b77a2a0" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="mailto:jessiejamesparajes@gmail.com" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Desktop Profile Image (Original large size) -->
+            <div class="hidden lg:block relative stagger-element animate-float z-10" data-profile-tilt>
+                <div class="relative w-full aspect-square rounded-full border-2 border-dashed border-slate-300 dark:border-slate-700 p-4" data-profile-tilt-target>
+                    <div class="profile-crawler-stage" data-crawler-stage aria-hidden="true"></div>
+                    <div class="profile-photo-layer w-full h-full rounded-full overflow-hidden relative shadow-2xl border-4 border-white dark:border-slate-900">
+                        <img src="image/profile/image.png" alt="Jessie James" class="w-full h-full object-cover">
+                    </div>
+                    <div class="profile-crawler-grip-stage" data-crawler-grip-stage aria-hidden="true"></div>
+                    <div class="absolute top-10 left-10 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-blue-500 text-xl border border-slate-100 dark:border-slate-700">
+                        <i class="fa-brands fa-react"></i>
+                    </div>
+                    <div class="absolute bottom-10 right-10 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-purple-600 text-xl border border-slate-100 dark:border-slate-700">
+                        <i class="fa-brands fa-php"></i>
+                    </div>
+                    <div class="absolute top-1/2 -right-6 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-black dark:text-white text-xl border border-slate-100 dark:border-slate-700">
+                        <i class="fa-brands fa-unity"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-24 relative z-10 px-6 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16">
+            <div class="lg:col-span-7 section-reveal">
+                <h2 class="section-title">About <span class="text-brand">Me</span></h2>
+                <div class="prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-400 text-base md:text-lg space-y-5 md:space-y-6">
+                    <p>
+                        Versatile Information Technology student blending full-stack web and mobile development with multimedia design. Experienced in building responsive platforms using React, PHP and Flutter. Complements core programming skills with hands-on experience in 2D game development using Unity and C#, as well as UI/UX and digital asset creation using Figma and Adobe tools. Brings a well-rounded problem-solving approach to technical projects.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-5 section-reveal">
+                <h2 class="section-title">Education</h2>
+                <div class="card-base p-6 md:p-8 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-brand transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
+                    <div class="flex items-start gap-4">
+                        <div class="p-3 bg-brand rounded-lg text-white mt-1 shrink-0">
+                            <i class="fa-solid fa-graduation-cap text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Bachelor of Science in Information Technology</h3>
+                            <h4 class="text-brand font-medium mb-2">PHINMA Cagayan De Oro College</h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm mb-4"><i class="fa-regular fa-calendar mr-2"></i>August 2023 - Present (Expected: June 2027)</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">Dean's Lister</span>
+                                <span class="badge">Student Scholar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 md:py-24 relative z-10 px-6 skills-section-redesign">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 md:mb-16 section-reveal">
+                <h2 class="section-title text-center">Technical <span class="text-brand">Arsenal</span></h2>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto px-4">A comprehensive overview of my tools, languages, and core competencies.</p>
+            </div>
+            
+            <div id="skills-container" class="skills-showcase">
+                </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="creative-projects-section relative z-10 px-6">
+        <div class="max-w-7xl mx-auto relative">
+            <div class="projects-heading section-reveal">
+                <div>
+                    <span class="section-eyebrow"><i class="fa-solid fa-sparkles"></i> Selected work</span>
+                    <h2 class="section-title mb-3">Featured <span class="text-brand">Projects</span></h2>
+                    <p class="projects-heading-copy">A collection of practical systems, interactive experiences, and mobile tools built around real problems.</p>
+                </div>
+                <div class="projects-count" aria-label="Three featured projects">
+                    <strong>03</strong>
+                    <span>Case<br>studies</span>
+                </div>
+            </div>
+            
+            <div id="projects-container" class="space-y-16 md:space-y-20">
+                </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative z-10 px-6 contact-redesign">
+        <div class="contact-grid-pattern" aria-hidden="true"></div>
+        <div class="max-w-7xl mx-auto relative">
+            <div class="contact-section-heading section-reveal">
+                <span class="section-eyebrow"><i class="fa-regular fa-paper-plane"></i> Start a conversation</span>
+                <h2 class="section-title">Let's Build Something <span class="text-brand">Meaningful.</span></h2>
+                <p>Have a project, opportunity, or idea in mind? Send the details and I’ll get back to you.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 md:gap-16">
+                <div class="lg:col-span-2 section-reveal contact-intro">
+                    <div class="contact-availability"> Available for opportunities</div>
+                    <h3>Choose your preferred way to connect.</h3>
+                    <p>Direct, simple, and always open to discussing good ideas.</p>
+                    
+                    <div class="space-y-5 md:space-y-6 contact-methods">
+                        <div class="flex items-center gap-4 group contact-method">
+                            <div class="w-12 h-12 rounded-full bg-brand flex items-center justify-center text-white shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Phone</p>
+                                <p class="text-slate-900 dark:text-white font-semibold">+63 906 034 4441</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group contact-method">
+                            <div class="w-12 h-12 rounded-full bg-brand flex items-center justify-center text-white shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Email</p>
+                                <p class="text-slate-900 dark:text-white font-semibold break-all">jessiejamesparajes@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group contact-method">
+                            <div class="w-12 h-12 rounded-full bg-brand flex items-center justify-center text-white shrink-0">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">LinkedIn</p>
+                                <a href="https://linkedin.com/in/jessie-james-parajes-81b77a2a0" class="text-slate-900 dark:text-white font-semibold hover:text-brand transition-colors">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-3 section-reveal contact-form-reveal">
+                    <div class="card-base overflow-hidden relative contact-form-card">
+                        <!-- Decorative Background -->
+                        <div class="absolute inset-0 pointer-events-none">
+                            <div class="absolute -top-20 -right-20 w-40 h-40 bg-brand/5 rounded-full blur-2xl"></div>
+                            <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-blue-500/5 rounded-full blur-2xl"></div>
+                            <div class="absolute top-1/3 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-1/4 right-0 w-24 h-24 bg-brand/10 rounded-full blur-xl"></div>
+                            <div class="absolute top-10 right-1/4 w-1 h-16 bg-brand/10 rounded-full"></div>
+                            <div class="absolute bottom-10 left-1/3 w-12 h-1 bg-brand/10 rounded-full"></div>
+                        </div>
+                        
+                        <!-- Header -->
+                        <div class="relative px-6 md:px-8 pt-6 md:pt-8 pb-5 border-b border-slate-100 dark:border-slate-800 contact-form-header">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-white shadow-lg shadow-brand/20">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white">Send a Message</h3>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400">I'll get back to you as soon as possible</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Body -->
+                        <div class="relative p-6 md:p-8 space-y-5 contact-form-body">
+                            <form id="contact-form" class="space-y-5">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div class="form-group">
+                                        <label class="form-label" for="from_name">Your Name</label>
+                                        <input type="text" id="from_name" name="from_name" class="form-input" placeholder="Enter your name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="from_email">Your Email</label>
+                                        <input type="email" id="from_email" name="from_email" class="form-input" placeholder="Enter your email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="subject">Subject</label>
+                                    <input type="text" id="subject" name="subject" class="form-input" placeholder="What's this about?" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="message">Message</label>
+                                    <textarea id="message" name="message" class="form-textarea" placeholder="Write your message here..." required></textarea>
+                                </div>
+                                <button type="submit" id="submit-btn" class="w-full py-3.5 bg-brand text-white rounded-xl font-bold transition-all duration-300 active:scale-[0.98] hover:shadow-xl hover:shadow-brand/30 text-sm md:text-base flex items-center justify-center gap-3 group mt-2 contact-submit">
+                                    <span id="btn-text">Send Message</span>
+                                    <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-white/20 group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300">
+                                        <i class="fa-regular fa-paper-plane text-xs"></i>
+                                    </span>
+                                </button>
+                            </form>
+                            <!-- Success Message -->
+                            <div id="form-success" class="hidden flex flex-col items-center justify-center py-10 text-center">
+                                <div class="w-16 h-16 rounded-full bg-brand flex items-center justify-center text-white text-3xl mb-4">
+                                    <i class="fa-regular fa-circle-check"></i>
+                                </div>
+                                <h4 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-2">Message Sent!</h4>
+                                <p class="text-slate-500 dark:text-slate-400">Thank you! I'll get back to you as soon as possible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="creative-footer relative z-10 px-6">
+        <div class="max-w-7xl mx-auto creative-footer-inner">
+            <a href="#hero" class="footer-brand">JESSIE<span>.</span>DEV</a>
+            <p>&copy; 2026 Jessie James C. Parajes. Crafted with code, curiosity, and a little caffeine.</p>
+            <a href="#hero" class="footer-back-top" aria-label="Back to top">Back to top <i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </footer>
+    <script src="js/data.js?v=20260831-5"></script>
+    <script src="js/main.js?v=20260831-22"></script>
+    <script type="module" src="character/profile-crawler.js?v=20260831-10"></script>
+</body>
+</html>
