@@ -73,13 +73,7 @@ const projectsData = [
         playUrl: "https://neon-outpost-by-jesce.pages.dev/",
         playLabel: "PLAY THIS GAME",
         githubUrl: "https://github.com/jessiejames1234",
-        description: "Developed a browser-based first-person 3D survival game where players defend Neon Outpost through 50 escalating waves, capture defeated enemies into a squad, and compete on a persistent leaderboard.",
-        highlights: [
-            "Designed a 50-wave progression system with escalating enemy counts, elite encounters every five waves, and the Outpost Core waiting at wave 50.",
-            "Built first-person combat with movement, sprinting, shooting, reloading, nano-shield and health systems, plus captured-squad Attack and Protect commands.",
-            "Created 20 distinct enemy units and a dedicated 3D Enemy Design Showroom for inspecting their models and combat roles.",
-            "Integrated account authentication, persistent global rankings, and owner tools for managing users, roles, and leaderboard scores."
-        ]
+        description: "Developed a browser-based first-person 3D survival game where players defend Neon Outpost through 50 escalating waves, capture defeated enemies into a squad, and compete on a persistent leaderboard."
     },
     {
         title: "Detention Break Out Mobile & Website Game",
@@ -92,31 +86,65 @@ const projectsData = [
             "image/Break Out Mobile/53dec02e-fab7-4216-89c2-8bebafff7270.jpg",
             "image/Break Out Mobile/fda47c7c-705b-49b3-84ff-c8eb75d84d28.jpg"
         ],
+        video: "image/Break Out Mobile/break_out.mp4",
+        playUrl: "https://play.unity.com/api/v1/games/game/9803011c-819e-4d3a-9124-cd8103f48b60/build/latest/frame",
+        playLabel: "PLAY THIS GAME",
         githubUrl: "https://github.com/jessiejames1234",
-        description: "Developed a level-based 2D top-down escape game set inside a school building.",
-        highlights: [
-            "Programmed core mechanics where two students have to work together to escape the classroom while avoiding AI-controlled teachers and monsters.",
-            "Built the game using Unity 6.2 handling sprite animations, scene transitions, and ensuring it runs smoothly on both Android and web browsers."
-        ]
+        description: "Developed a level-based 2D top-down escape game set inside a school building."
     },
     {
         title: "Web-Based Teacher-Room Tracking System with Real-Time Monitoring and 3D Classroom Visualization",
         type: "Capstone Project",
         date: "November 2025 - Present",
-        tech: ["PHP", "ReactJS", "Mysql", "JS", "Bootstrap", "Git", "Blender", "Visual Studio", "Figma", "Socket io"],
+        tech: ["PHP", "ReactJS", "Mysql", "JS", "Bootstrap", "Git", "Blender", "Three.js", "Visual Studio", "Figma", "Socket io"],
         images: [
-            "image/Teacher-Room Tracking/Screenshot 2026-07-01 134456.png",
-            "image/Teacher-Room Tracking/Screenshot 2026-07-01 135036.png",
-            "image/Teacher-Room Tracking/Screenshot 2026-07-01 135139.png",
-            "image/Teacher-Room Tracking/638311467_892926050217215_2741885221166264343_n.png"
+            "image/Teacher-Room Tracking/Screenshot 2026-08-31 202856.png",
+            "image/Teacher-Room Tracking/Screenshot 2026-08-31 202905.png",
+            "image/Teacher-Room Tracking/Screenshot 2026-08-31 202931.png",
+            "image/Teacher-Room Tracking/Screenshot 2026-08-31 202956.png"
         ],
         githubUrl: "https://github.com/jessiejames1234",
-        description: "Built a web application to automate faculty attendance and replace the manual paper-checking process handled by student scholars.",
-        highlights: [
-            "Created a digital Check-In, Check-Mid, and Check-Out system to accurately track teachers even when their class schedules overlap.",
-            "Solved GPS location conflicts in multi-story buildings by combining classroom center coordinates with QR code scanning at stairways to verify the exact floor.",
-            "Added a request module so teachers can easily ask the Department Admin for schedule changes or the Dean for attendance corrections directly through the system.",
-            "Linked backend to a real-time dashboard and a 3D classroom visualizer (using WebSockets) so admins can see room occupancy live."
-        ]
+        description: "Built a web application to automate faculty attendance and replace the manual paper-checking process handled by student scholars."
+    }
+];
+
+const additionalProjectsData = [
+    {
+        title: "Bakeshop Cashiering App",
+        type: "Mobile Point-of-Sale Application",
+        images: [
+            "image/Bakeshop Cashiering App/Screenshot 2026-07-09 213659.png",
+            "image/Bakeshop Cashiering App/Screenshot 2026-07-09 214226.png",
+            "image/Bakeshop Cashiering App/Screenshot 2026-07-09 213936.png"
+        ],
+        tech: ["Android", "Dart", "Flutter", "Hive", "Git", "Visual Studio"],
+        githubUrl: "https://github.com/jessiejames1234",
+        description: "An offline-capable mobile point-of-sale application for managing bakery products, processing cart transactions, and reviewing sales records through a streamlined cashier workflow."
+    },
+    {
+        title: "Hardware POS & Warehouse Inventory System",
+        type: "Web-Based Business System",
+        images: [
+            "image/hardware pos with werehouse inventory system/Screenshot 2026-08-31 194405.png",
+            "image/hardware pos with werehouse inventory system/Screenshot 2026-08-31 194316.png",
+            "image/hardware pos with werehouse inventory system/Screenshot 2026-08-31 194309.png",
+            "image/hardware pos with werehouse inventory system/Screenshot 2026-08-31 193506.png"
+        ],
+        tech: ["PHP", "JavaScript", "CSS", "Bootstrap", "HTML", "Visual Studio", "MySQL", "Git"],
+        githubUrl: "https://github.com/jessiejames1234",
+        description: "A web-based point-of-sale and warehouse inventory system that brings hardware sales, product records, and stock monitoring into one organized operational workspace."
+    },
+    {
+        title: "Shoe Store Point-of-Sale System",
+        type: "Web-Based Retail System",
+        images: [
+            "image/shoe point of sale/Screenshot 2026-08-31 185928.png",
+            "image/shoe point of sale/Screenshot 2026-08-31 185908.png",
+            "image/shoe point of sale/Screenshot 2026-08-31 185834.png",
+            "image/shoe point of sale/Screenshot 2026-08-31 185812.png"
+        ],
+        tech: ["PHP", "JavaScript", "CSS", "HTML", "Visual Studio", "MySQL", "Git"],
+        githubUrl: "https://github.com/jessiejames1234",
+        description: "A web-based retail point-of-sale system designed to simplify shoe product selection, checkout processing, and the organization of sales information."
     }
 ];

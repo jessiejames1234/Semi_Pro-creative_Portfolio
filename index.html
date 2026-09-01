@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     
-    <link rel="stylesheet" href="css/style.css?v=20260831-30">
+    <link rel="stylesheet" href="css/style.css?v=20260901-2">
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-slate-800 dark:text-slate-200 font-sans antialiased overflow-x-hidden transition-colors duration-500">
 
@@ -256,6 +256,12 @@
             
             <div id="projects-container" class="space-y-16 md:space-y-20">
                 </div>
+            <div class="more-projects-action">
+                <button id="open-more-projects" class="more-projects-button" type="button" aria-haspopup="dialog" aria-controls="more-projects-modal">
+                    <span>View More Projects</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -373,6 +379,22 @@
         </div>
     </section>
 
+    <!-- Additional Projects Dialog -->
+    <div id="more-projects-modal" class="additional-projects-modal hidden" role="dialog" aria-modal="true" aria-labelledby="more-projects-title">
+        <div class="additional-projects-panel">
+            <header class="additional-projects-header">
+                <div>
+                    <p>Additional work</p>
+                    <h2 id="more-projects-title">More Projects</h2>
+                </div>
+                <button id="close-more-projects" type="button" aria-label="Close more projects">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </header>
+            <div id="more-projects-grid" class="additional-projects-grid"></div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="creative-footer relative z-10 px-6">
         <div class="max-w-7xl mx-auto creative-footer-inner">
@@ -381,8 +403,8 @@
             <a href="#hero" class="footer-back-top" aria-label="Back to top">Back to top <i class="fa-solid fa-arrow-up"></i></a>
         </div>
     </footer>
-    <script src="js/data.js?v=20260831-5"></script>
-    <script src="js/main.js?v=20260831-22"></script>
+    <script src="js/data.js?v=20260901-2"></script>
+    <script src="js/main.js?v=20260901-2"></script>
     <script type="module" src="character/profile-crawler.js?v=20260831-10"></script>
 </body>
 </html>

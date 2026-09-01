@@ -234,9 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generate Tech Badges
         const techBadges = project.tech.map(t => `<span class="project-tech-badge">${t}</span>`).join('');
         
-        // Generate Highlights
-        const highlightsList = project.highlights.map(h => `<li><span class="project-highlight-icon"><i class="fa-solid fa-check"></i></span><span>${h}</span></li>`).join('');
-
         // Generate image carousel
         const carouselId = `carousel-${index}`;
         let imagesHtml = project.images.map((img, i) => `
@@ -271,6 +268,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </a>
         ` : '';
 
+        const projectActionsHtml = projectActionHtml || githubActionHtml ? `
+            <div class="project-actions">
+                ${githubActionHtml}
+                ${projectActionHtml}
+            </div>
+        ` : '';
+
         // Project media is landscape by default; a future project can opt into portrait mode.
         const isPortraitProject = project.layout === "portrait";
         const aspectClass = isPortraitProject ? 'aspect-[3/5] max-w-xs mx-auto' : 'aspect-video';
@@ -297,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${dotsHtml}
                     </div>
                 </div>
-                ${projectActionHtml}
                 <span class="project-visual-index">${projectNumber}</span>
             </div>
         `;
@@ -312,15 +315,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-description">${project.description}</p>
 
-                <ul class="project-highlights">
-                    ${highlightsList}
-                </ul>
-
                 <div class="project-tech-list">
                     ${techBadges}
                 </div>
 
-                ${githubActionHtml}
+                ${projectActionsHtml}
 
                 <div class="project-card-footer">
                     <span><i class="fa-solid fa-code"></i> Designed &amp; developed</span>
@@ -331,6 +330,138 @@ document.addEventListener('DOMContentLoaded', () => {
 
         projectElement.innerHTML = imageCol + contentCol;
         projectsContainer.appendChild(projectElement);
+    });
+
+    // --- Additional Projects Modal ---
+    const moreProjectsModal = document.getElementById('more-projects-modal');
+    const moreProjectsGrid = document.getElementById('more-projects-grid');
+    const openMoreProjectsButton = document.getElementById('open-more-projects');
+    const closeMoreProjectsButton = document.getElementById('close-more-projects');
+    let modalTrigger = null;
+    let additionalCarouselTimer = null;
+
+    if (moreProjectsGrid && Array.isArray(additionalProjectsData)) {
+        moreProjectsGrid.innerHTML = additionalProjectsData.map((project, projectIndex) => {
+            const badges = project.tech.map((technology) => `<span>${technology}</span>`).join('');
+            const carouselId = `additional-carousel-${projectIndex}`;
+            const slides = project.images.map((image, imageIndex) => `
+                <div class="additional-carousel-slide ${imageIndex === 0 ? 'is-active' : ''}" data-additional-carousel="${carouselId}" data-index="${imageIndex}">
+                    <img src="${image}" alt="${project.title} interface screenshot ${imageIndex + 1}">
+                </div>
+            `).join('');
+            const dots = project.images.map((_, imageIndex) => `
+                <button class="additional-carousel-dot ${imageIndex === 0 ? 'is-active' : ''}" type="button" data-additional-carousel="${carouselId}" data-index="${imageIndex}" aria-label="Show ${project.title} image ${imageIndex + 1}"></button>
+            `).join('');
+
+            return `
+                <article class="additional-project-card">
+                    <div id="${carouselId}" class="additional-project-image" data-current="0">
+                        ${slides}
+                        <button class="additional-carousel-arrow additional-carousel-prev" type="button" data-additional-carousel="${carouselId}" aria-label="Previous ${project.title} image">
+                            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        </button>
+                        <button class="additional-carousel-arrow additional-carousel-next" type="button" data-additional-carousel="${carouselId}" aria-label="Next ${project.title} image">
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </button>
+                        <div class="additional-carousel-dots">${dots}</div>
+                    </div>
+                    <div class="additional-project-content">
+                        <p class="additional-project-type">${project.type}</p>
+                        <h3>${project.title}</h3>
+                        <p class="additional-project-description">${project.description}</p>
+                        <div class="additional-project-tech" aria-label="Technologies used">${badges}</div>
+                        <a class="additional-project-github" href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" aria-label="View ${project.title} on GitHub in a new tab">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>View on GitHub</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+            `;
+        }).join('');
+    }
+
+    function showAdditionalSlide(carouselId, targetIndex) {
+        const carousel = document.getElementById(carouselId);
+        const slides = document.querySelectorAll(`.additional-carousel-slide[data-additional-carousel="${carouselId}"]`);
+        const dots = document.querySelectorAll(`.additional-carousel-dot[data-additional-carousel="${carouselId}"]`);
+        if (!carousel || !slides.length) return;
+
+        const normalizedIndex = (targetIndex + slides.length) % slides.length;
+        slides.forEach((slide, index) => slide.classList.toggle('is-active', index === normalizedIndex));
+        dots.forEach((dot, index) => dot.classList.toggle('is-active', index === normalizedIndex));
+        carousel.dataset.current = normalizedIndex;
+    }
+
+    function stopAdditionalCarouselAutoplay() {
+        if (!additionalCarouselTimer) return;
+        clearInterval(additionalCarouselTimer);
+        additionalCarouselTimer = null;
+    }
+
+    function startAdditionalCarouselAutoplay() {
+        stopAdditionalCarouselAutoplay();
+        additionalCarouselTimer = setInterval(() => {
+            moreProjectsGrid?.querySelectorAll('.additional-project-image').forEach((carousel) => {
+                const currentIndex = Number(carousel.dataset.current || 0);
+                showAdditionalSlide(carousel.id, currentIndex + 1);
+            });
+        }, 3500);
+    }
+
+    moreProjectsGrid?.querySelectorAll('.additional-carousel-prev').forEach((button) => {
+        button.addEventListener('click', () => {
+            const carouselId = button.dataset.additionalCarousel;
+            const carousel = document.getElementById(carouselId);
+            showAdditionalSlide(carouselId, Number(carousel?.dataset.current || 0) - 1);
+            startAdditionalCarouselAutoplay();
+        });
+    });
+
+    moreProjectsGrid?.querySelectorAll('.additional-carousel-next').forEach((button) => {
+        button.addEventListener('click', () => {
+            const carouselId = button.dataset.additionalCarousel;
+            const carousel = document.getElementById(carouselId);
+            showAdditionalSlide(carouselId, Number(carousel?.dataset.current || 0) + 1);
+            startAdditionalCarouselAutoplay();
+        });
+    });
+
+    moreProjectsGrid?.querySelectorAll('.additional-carousel-dot').forEach((dot) => {
+        dot.addEventListener('click', () => {
+            showAdditionalSlide(dot.dataset.additionalCarousel, Number(dot.dataset.index));
+            startAdditionalCarouselAutoplay();
+        });
+    });
+
+    function openMoreProjectsModal() {
+        if (!moreProjectsModal) return;
+        modalTrigger = document.activeElement;
+        moreProjectsModal.classList.remove('hidden');
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+        startAdditionalCarouselAutoplay();
+        closeMoreProjectsButton?.focus();
+    }
+
+    function closeMoreProjectsModal() {
+        if (!moreProjectsModal) return;
+        moreProjectsModal.classList.add('hidden');
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+        stopAdditionalCarouselAutoplay();
+        modalTrigger?.focus();
+    }
+
+    openMoreProjectsButton?.addEventListener('click', openMoreProjectsModal);
+    closeMoreProjectsButton?.addEventListener('click', closeMoreProjectsModal);
+    moreProjectsModal?.addEventListener('click', (event) => {
+        if (event.target === moreProjectsModal) closeMoreProjectsModal();
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && moreProjectsModal && !moreProjectsModal.classList.contains('hidden')) {
+            closeMoreProjectsModal();
+        }
     });
 
     // --- Carousel Navigation with Auto-Play ---
