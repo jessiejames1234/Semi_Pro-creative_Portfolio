@@ -1,5 +1,3 @@
-import * as THREE from "three";
-import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
 const box = new RoundedBoxGeometry(1, 1, 1, 2, 0.075);
 const sphere = new THREE.SphereGeometry(0.5, 10, 7);
@@ -31,7 +29,7 @@ function makeMaterial(color, emissive = 0.08, metalness = 0.4) {
     });
 }
 
-export function createScrapCrawler() {
+function createScrapCrawler() {
     const group = new THREE.Group();
     group.name = "E01 Scrap Crawler";
 
@@ -194,7 +192,7 @@ export function createScrapCrawler() {
 
 // Stretch the first two left/right leg pairs forward and down. When the front
 // rig turns toward the portrait, +Z becomes the cat-like down-left reach.
-export function poseFrontLegsAsGrippers(crawler) {
+function poseFrontLegsAsGrippers(crawler) {
     crawler.parts.legs.filter((leg) => leg.rowIndex <= 1).forEach((leg) => {
         const side = leg.side;
         const secondPair = leg.rowIndex === 1;
@@ -221,5 +219,3 @@ export function poseFrontLegsAsGrippers(crawler) {
         }
     });
 }
-
-export { THREE };

@@ -2300,3 +2300,353 @@ body.modal-open {
         padding-bottom: 1.5rem !important;
     }
 }
+
+
+/* The profile image keeps its natural transparent body outline. */
+.profile-portrait-stage {
+    position: relative;
+    flex: none;
+    width: clamp(16rem, 28vw, 21rem);
+    aspect-ratio: 1122 / 1402;
+    isolation: isolate;
+    overflow: visible;
+}
+
+.profile-portrait-stage-mobile {
+    width: clamp(8.5rem, 34vw, 10rem);
+}
+
+.profile-portrait-stage .profile-photo-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.profile-portrait-stage .profile-photo-layer img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0 0 48% 48% / 0 0 8% 8%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 77%, rgba(0, 0, 0, 0.85) 85%, rgba(0, 0, 0, 0.25) 94%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 77%, rgba(0, 0, 0, 0.85) 85%, rgba(0, 0, 0, 0.25) 94%, transparent 100%);
+}
+
+.profile-portrait-stage .crawler-arm-game-link {
+    max-width: calc(100vw - 1rem);
+    box-sizing: border-box;
+}
+
+.profile-portrait-stage .crawler-arm-game-link[hidden] {
+    display: none;
+}
+
+
+.profile-tech-icon {
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(2, 8, 23, 0.22);
+    font-size: 1.25rem;
+    transform-style: preserve-3d;
+    transition: transform 120ms ease-out, box-shadow 180ms ease;
+}
+
+.profile-tech-icon i {
+    transform: translateZ(10px);
+}
+
+.profile-tech-icon:hover {
+    z-index: 5;
+    box-shadow: 0 14px 28px rgba(2, 8, 23, 0.3);
+}
+
+.dark .profile-tech-icon {
+    border-color: #334155;
+    background: #1e293b;
+}
+
+.profile-tech-icon-react {
+    top: 17%;
+    left: -11%;
+    color: #0ea5e9;
+}
+
+.profile-tech-icon-php {
+    right: -10%;
+    bottom: 21%;
+    color: #7c3aed;
+}
+
+.profile-tech-icon-unity {
+    bottom: 6%;
+    left: -7%;
+    color: #111827;
+}
+
+.dark .profile-tech-icon-unity {
+    color: #ffffff;
+}
+
+.profile-portrait-stage-mobile .profile-tech-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.8rem;
+}
+
+.profile-portrait-stage-mobile .profile-tech-icon-react {
+    left: -8%;
+}
+
+.profile-portrait-stage-mobile .profile-tech-icon-php {
+    right: -7%;
+}
+
+.profile-portrait-stage-mobile .profile-tech-icon-unity {
+    left: -6%;
+}
+
+
+.profile-portrait-stage .profile-tech-icon-react {
+    left: -18%;
+}
+
+.profile-portrait-stage .profile-tech-icon-unity {
+    left: -22%;
+}
+
+.profile-portrait-stage .profile-tech-icon-php {
+    right: -22%;
+}
+
+.profile-portrait-stage .crawler-arm-game-link,
+.profile-portrait-stage .crawler-arm-game-link:hover,
+.profile-portrait-stage .crawler-arm-game-link:focus-visible {
+    top: 0;
+    right: 0;
+    left: auto;
+    min-height: 2rem;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.65rem;
+    transform: none !important;
+}
+
+/* The link and tech icons float on the crawler's bob and sway. */
+.profile-portrait-stage .crawler-arm-game-link,
+.profile-portrait-stage .profile-tech-icon {
+    translate: var(--crawler-float-x, 0px) var(--crawler-float-y, 0px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-portrait-stage .crawler-arm-game-link,
+    .profile-portrait-stage .profile-tech-icon {
+        translate: none;
+    }
+}
+
+/* Dashed contour follows the portrait alpha and its curved lower edge. */
+.profile-body-outline {
+    position: absolute;
+    z-index: 3;
+    left: -1.783%;
+    top: -1.427%;
+    width: 103.565%;
+    max-width: none;
+    height: 104.708%;
+    transform: scale(1.035, 1.02);
+    transform-origin: center;
+    -webkit-mask-image: linear-gradient(to bottom, #000 75%, rgba(0, 0, 0, 0.85) 82%, rgba(0, 0, 0, 0.25) 92%, transparent 97%);
+    mask-image: linear-gradient(to bottom, #000 75%, rgba(0, 0, 0, 0.85) 82%, rgba(0, 0, 0, 0.25) 92%, transparent 97%);
+    pointer-events: none;
+}
+
+/* Profile-only static glow and circuit grid. */
+.profile-portrait-stage::before,
+.profile-portrait-stage::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: -24% -42% -19%;
+    pointer-events: none;
+}
+
+.profile-portrait-stage::before {
+    background:
+        radial-gradient(ellipse at 50% 49%, rgba(49, 70, 82, 0.32), rgba(30, 41, 59, 0.12) 53%, transparent 76%);
+}
+
+.profile-portrait-stage::after {
+    background-image:
+        linear-gradient(rgba(148, 163, 184, 0.30) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.30) 1px, transparent 1px),
+        radial-gradient(circle, rgba(100, 116, 139, 0.58) 1px, transparent 1.5px);
+    background-size: 44px 44px;
+    background-position: center;
+    -webkit-mask-image: radial-gradient(ellipse 53% 55% at 50% 50%, #000 8%, transparent 90%);
+    mask-image: radial-gradient(ellipse 53% 55% at 50% 50%, #000 8%, transparent 90%);
+    opacity: 0.5;
+}
+
+html:not(.dark) .profile-body-outline {
+    filter: brightness(0);
+}
+
+html:not(.dark) .profile-portrait-stage::before {
+    background:
+        radial-gradient(ellipse at 50% 49%, rgba(148, 163, 184, 0.18), rgba(186, 205, 214, 0.10) 55%, transparent 77%);
+}
+
+html:not(.dark) .profile-portrait-stage::after {
+    background-image:
+        linear-gradient(rgba(51, 65, 85, 0.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(51, 65, 85, 0.22) 1px, transparent 1px),
+        radial-gradient(circle, rgba(71, 85, 105, 0.52) 1px, transparent 1.5px);
+    opacity: 0.55;
+}
+
+@media (max-width: 1023px) {
+    .profile-portrait-stage::before,
+    .profile-portrait-stage::after {
+        inset: -24% -42% 0;
+    }
+}
+/* Rust Guard occupies the sixth cell beside the skills, with no card frame. */
+.rust-guard-stage {
+    position: relative;
+    width: min(100%, 24rem);
+    height: 18rem;
+    margin: 1.5rem auto 0;
+    overflow: hidden;
+    cursor: crosshair;
+    touch-action: manipulation;
+    background: radial-gradient(circle at 50% 55%, rgba(100, 116, 139, 0.08), transparent 68%);
+}
+
+.dark .rust-guard-stage {
+    background: radial-gradient(circle at 50% 55%, rgba(100, 116, 139, 0.12), transparent 68%);
+}
+
+.rust-guard-stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.rust-guard-stage:focus-visible {
+    outline: 2px solid #059669;
+    outline-offset: 2px;
+}
+
+.rust-guard-label {
+    position: absolute;
+    z-index: 1;
+    top: 0.35rem;
+    left: 0.5rem;
+    color: #475569;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    pointer-events: none;
+}
+
+.rust-guard-label span {
+    display: block;
+    margin-top: 0.2rem;
+    color: #64748b;
+    font-size: 0.55rem;
+    font-weight: 600;
+}
+
+.dark .rust-guard-label { color: #cbd5e1; }
+.dark .rust-guard-label span { color: #94a3b8; }
+
+@media (min-width: 1024px) {
+    .rust-guard-stage {
+        grid-column: 3;
+        grid-row: 2;
+        align-self: start;
+        width: 100%;
+        height: clamp(18rem, 25vw, 23rem);
+        margin: 0;
+    }
+}
+
+/* Pixel characters from the creative portfolio sit above the Detention preview. */
+.project-pixel-cast {
+    --pixel-cast-height: 10rem;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    height: var(--pixel-cast-height);
+    margin-bottom: 0.5rem;
+    padding: 0.4rem 0.5rem 0.2rem;
+    cursor: crosshair;
+    outline: none;
+}
+
+.project-pixel-cast:focus-visible {
+    outline: 2px solid #059669;
+    outline-offset: -2px;
+}
+
+.project-pixel-cast-hint {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.65rem;
+    color: #64748b;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    pointer-events: none;
+}
+
+.dark .project-pixel-cast-hint { color: #94a3b8; }
+
+.project-pixel-actor {
+    display: block;
+    width: auto;
+    max-width: 45%;
+    height: 71%;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+/* Match the visible sprite heights and place their feet on one line. */
+.project-pixel-actor[data-pixel-actor="one"] {
+    transform: translateY(2px);
+}
+
+.project-pixel-actor[data-pixel-actor="two"] {
+    height: calc(var(--pixel-cast-height) - 2.2rem);
+}
+
+@media (min-width: 1024px) {
+    .project-pixel-actor[data-pixel-actor="one"] {
+        height: 74%;
+        transform: translateY(3px);
+    }
+
+    .project-pixel-cast {
+        --pixel-cast-height: 12rem;
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        bottom: calc(100% + 0.75rem);
+        margin: 0;
+    }
+}

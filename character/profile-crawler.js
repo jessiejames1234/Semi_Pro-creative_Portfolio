@@ -1,4 +1,3 @@
-import { THREE, createScrapCrawler, poseFrontLegsAsGrippers } from "./scrap-crawler.js";
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let gameGuideActive = false;
@@ -278,8 +277,6 @@ document.querySelectorAll("[data-crawler-stage]").forEach((stage, stageIndex) =>
         raisedRightArm.foot.getWorldPosition(raisedArmTip);
         projectedArmTip.copy(raisedArmTip).project(camera);
         crawlerGameLink.hidden = projectedArmTip.z < -1 || projectedArmTip.z > 1;
-        crawlerGameLink.style.left = `${gripStage.offsetLeft + (projectedArmTip.x + 1) * 0.5 * gripStage.offsetWidth}px`;
-        crawlerGameLink.style.top = `${gripStage.offsetTop + (1 - projectedArmTip.y) * 0.5 * gripStage.offsetHeight}px`;
     };
 
     const resize = () => {
@@ -301,8 +298,12 @@ document.querySelectorAll("[data-crawler-stage]").forEach((stage, stageIndex) =>
         resize();
         const seconds = time * 0.001 + stageIndex * 0.7;
         if (!reducedMotion) {
-            const perchBob = Math.sin(seconds * 1.25) * 0.018;
-            const perchRoll = Math.sin(seconds * 0.82) * 0.012;
+            const bobWave = Math.sin(seconds * 1.25);
+            const swayWave = Math.sin(seconds * 0.82);
+            const perchBob = bobWave * 0.018;
+            const perchRoll = swayWave * 0.012;
+            stage.parentElement.style.setProperty("--crawler-float-x", `${(swayWave * 3).toFixed(2)}px`);
+            stage.parentElement.style.setProperty("--crawler-float-y", `${(-bobWave * 4).toFixed(2)}px`);
             crawler.group.position.y = gripCrawler.group.position.y = perchY + perchBob;
             crawler.group.rotation.z = gripCrawler.group.rotation.z = 0.18 + perchRoll;
             frontRig.rotation.x = 0.17 + Math.sin(seconds * 0.9) * 0.008;

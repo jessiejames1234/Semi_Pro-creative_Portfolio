@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     
-    <link rel="stylesheet" href="css/style.css?v=20260901-2">
+    <link rel="stylesheet" href="css/style.css?v=20260930-25">
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-slate-800 dark:text-slate-200 font-sans antialiased overflow-x-hidden transition-colors duration-500">
 
@@ -125,25 +125,21 @@
     <section id="hero" class="min-h-screen flex items-center relative z-10 px-6 pt-20">
         <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div class="stagger-element">
-                <!-- Mobile Profile Image (Floating at top) -->
-                <div class="lg:hidden flex justify-center mb-6 stagger-element" data-profile-tilt>
-                    <div class="animate-float">
-                        <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-dashed border-slate-300 dark:border-slate-700 p-2.5 relative" data-profile-tilt-target>
-                            <div class="profile-crawler-stage profile-crawler-stage-mobile" data-crawler-stage aria-hidden="true"></div>
-                            <div class="profile-photo-layer w-full h-full rounded-full overflow-hidden shadow-xl border-4 border-white dark:border-slate-900">
-                                <img src="image/profile/sample2.jpg" alt="Jessie James" class="w-full h-full object-cover">
-                            </div>
-                            <div class="profile-crawler-grip-stage profile-crawler-stage-mobile" data-crawler-grip-stage aria-hidden="true"></div>
-                            <div class="absolute -top-1 -right-1 w-7 h-7 bg-white dark:bg-slate-800 rounded-full shadow flex items-center justify-center text-blue-500 text-xs border border-slate-100 dark:border-slate-700">
-                                <i class="fa-brands fa-react"></i>
-                            </div>
-                            <div class="absolute -bottom-1 -left-1 w-7 h-7 bg-white dark:bg-slate-800 rounded-full shadow flex items-center justify-center text-purple-600 text-xs border border-slate-100 dark:border-slate-700">
-                                <i class="fa-brands fa-php"></i>
-                            </div>
+                <!-- Mobile profile cutout -->
+                <div class="lg:hidden flex justify-center mb-6 stagger-element">
+                    <div class="profile-portrait-stage profile-portrait-stage-mobile">
+                        <div class="profile-crawler-stage profile-crawler-stage-mobile" data-crawler-stage aria-hidden="true"></div>
+                        <img class="profile-body-outline" src="image/profile/prof-outline.svg?v=20260930-4" alt="" aria-hidden="true">
+                        <div class="profile-photo-layer">
+                            <img src="image/profile/prof-transparent.png" alt="Jessie James">
                         </div>
+                        <div class="profile-crawler-grip-stage profile-crawler-stage-mobile" data-crawler-grip-stage aria-hidden="true"></div>
+                        <span class="profile-tech-icon profile-tech-icon-react" aria-hidden="true"><i class="fa-brands fa-react"></i></span>
+                        <span class="profile-tech-icon profile-tech-icon-php" aria-hidden="true"><i class="fa-brands fa-php"></i></span>
+                        <span class="profile-tech-icon profile-tech-icon-unity" aria-hidden="true"><i class="fa-brands fa-unity"></i></span>
                     </div>
                 </div>
-                
+
                 <h1 class="text-4xl sm:text-5xl md:text-7xl font-heading font-extrabold text-slate-900 dark:text-white mb-4 md:mb-6 leading-tight text-center lg:text-left">
                     Hi, I'm <span class="text-brand">Jessie James.</span>
                 </h1>
@@ -169,23 +165,18 @@
                 </div>
             </div>
             
-            <!-- Desktop Profile Image (Original large size) -->
-            <div class="hidden lg:block relative stagger-element animate-float z-10" data-profile-tilt>
-                <div class="relative w-full aspect-square rounded-full border-2 border-dashed border-slate-300 dark:border-slate-700 p-4" data-profile-tilt-target>
+            <!-- Desktop profile cutout -->
+            <div class="hidden lg:flex justify-center relative stagger-element z-10">
+                <div class="profile-portrait-stage">
                     <div class="profile-crawler-stage" data-crawler-stage aria-hidden="true"></div>
-                    <div class="profile-photo-layer w-full h-full rounded-full overflow-hidden relative shadow-2xl border-4 border-white dark:border-slate-900">
-                        <img src="image/profile/image.png" alt="Jessie James" class="w-full h-full object-cover">
+                    <img class="profile-body-outline" src="image/profile/prof-outline.svg?v=20260930-4" alt="" aria-hidden="true">
+                    <div class="profile-photo-layer">
+                        <img src="image/profile/prof-transparent.png" alt="Jessie James">
                     </div>
                     <div class="profile-crawler-grip-stage" data-crawler-grip-stage aria-hidden="true"></div>
-                    <div class="absolute top-10 left-10 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-blue-500 text-xl border border-slate-100 dark:border-slate-700">
-                        <i class="fa-brands fa-react"></i>
-                    </div>
-                    <div class="absolute bottom-10 right-10 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-purple-600 text-xl border border-slate-100 dark:border-slate-700">
-                        <i class="fa-brands fa-php"></i>
-                    </div>
-                    <div class="absolute top-1/2 -right-6 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-black dark:text-white text-xl border border-slate-100 dark:border-slate-700">
-                        <i class="fa-brands fa-unity"></i>
-                    </div>
+                    <span class="profile-tech-icon profile-tech-icon-react" aria-hidden="true"><i class="fa-brands fa-react"></i></span>
+                    <span class="profile-tech-icon profile-tech-icon-php" aria-hidden="true"><i class="fa-brands fa-php"></i></span>
+                    <span class="profile-tech-icon profile-tech-icon-unity" aria-hidden="true"><i class="fa-brands fa-unity"></i></span>
                 </div>
             </div>
         </div>
@@ -235,7 +226,10 @@
             </div>
             
             <div id="skills-container" class="skills-showcase">
+                <div class="rust-guard-stage" data-rust-guard tabindex="0" aria-label="Rust Guard robot. Hover or focus to make it walk.">
+                    <span class="rust-guard-label">RUST GUARD <span>HOVER TO WALK</span></span>
                 </div>
+            </div>
         </div>
     </section>
 
@@ -404,7 +398,9 @@
         </div>
     </footer>
     <script src="js/data.js?v=20260901-2"></script>
-    <script src="js/main.js?v=20260901-2"></script>
-    <script type="module" src="character/profile-crawler.js?v=20260831-10"></script>
+    <script src="js/main.js?v=20260930-6"></script>
+    <script src="js/pixel-cast.js?v=20260930-2"></script>
+    <script src="character/crawler-loader.js?v=20260930-2"></script>
+    <script src="robots/rust-guard-loader.js?v=20260930-1"></script>
 </body>
 </html>

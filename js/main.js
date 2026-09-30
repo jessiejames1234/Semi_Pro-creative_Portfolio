@@ -221,6 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         skillsContainer.appendChild(category);
     });
+    // Keep the static Rust Guard stage in the open sixth grid cell.
+    skillsContainer.appendChild(skillsContainer.querySelector('[data-rust-guard]'));
 
     // --- 3. Render Projects Dynamically (Alternating Layout) ---
     const projectsContainer = document.getElementById('projects-container');
@@ -279,8 +281,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const isPortraitProject = project.layout === "portrait";
         const aspectClass = isPortraitProject ? 'aspect-[3/5] max-w-xs mx-auto' : 'aspect-video';
         
+        const pixelCastHtml = project.title === 'Detention Break Out Mobile & Website Game' ? `
+            <div class="project-pixel-cast" data-pixel-cast tabindex="0" aria-label="Hover or focus to animate two pixel characters walking">
+                <span class="project-pixel-cast-hint" aria-hidden="true">HOVER TO WALK</span>
+                <canvas class="project-pixel-actor" data-pixel-actor="one" width="190" height="260" aria-hidden="true"></canvas>
+                <canvas class="project-pixel-actor" data-pixel-actor="two" width="180" height="240" aria-hidden="true"></canvas>
+            </div>
+        ` : '';
+
         const imageCol = `
             <div class="project-visual-wrap ${!isEven ? 'lg:order-2' : ''}">
+                ${pixelCastHtml}
                 <div class="project-visual group">
                     <div class="project-window-bar">
                         <span class="project-window-dots"><i></i><i></i><i></i></span>
@@ -701,31 +712,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Profile 3D Mouse Tilt (keeps the existing floating animation) ---
-    const supportsProfileTilt = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (supportsProfileTilt) {
-        document.querySelectorAll('[data-profile-tilt]').forEach(profile => {
-            const frame = profile.querySelector('[data-profile-tilt-target]');
-            if (!frame) return;
-
+    // Tilt each tech icon toward the pointer without interrupting its crawler-synced float.
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".profile-tech-icon").forEach((icon) => {
             const updateTilt = (event) => {
-                const rect = profile.getBoundingClientRect();
-                const mouseX = (event.clientX - rect.left) / rect.width - 0.5;
-                const mouseY = (event.clientY - rect.top) / rect.height - 0.5;
-
-                frame.style.transform = `perspective(900px) rotateX(${-mouseY * 10}deg) rotateY(${mouseX * 12}deg) scale3d(1.02, 1.02, 1.02)`;
+                if (event.pointerType === "touch") return;
+                const rect = icon.getBoundingClientRect();
+                const x = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - 0.5) * 2));
+                const y = Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - 0.5) * 2));
+                icon.style.transform = `perspective(450px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg) scale(1.1)`;
             };
-
-            const resetTilt = () => {
-                frame.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            };
-
-            profile.addEventListener('pointerdown', updateTilt, { passive: true });
-            profile.addEventListener('pointermove', updateTilt, { passive: true });
-            profile.addEventListener('pointerleave', resetTilt);
-            profile.addEventListener('pointerup', resetTilt);
-            profile.addEventListener('pointercancel', resetTilt);
+            const resetTilt = () => { icon.style.transform = ""; };
+            icon.addEventListener("pointerenter", updateTilt, { passive: true });
+            icon.addEventListener("pointermove", updateTilt, { passive: true });
+            icon.addEventListener("pointerleave", resetTilt);
+            icon.addEventListener("pointercancel", resetTilt);
         });
     }
 
