@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     
-    <link rel="stylesheet" href="css/style.css?v=20261001-7">
+    <link rel="stylesheet" href="css/style.css?v=20261001-14">
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-slate-800 dark:text-slate-200 font-sans antialiased overflow-x-hidden transition-colors duration-500">
 
@@ -110,12 +110,12 @@
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="lg:hidden hidden mt-4 pb-4">
-            <div class="flex flex-col space-y-2 bg-card-light dark:bg-card-dark rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl p-4">
-                <a href="#about" class="mobile-nav-link">About</a>
-                <a href="#skills" class="mobile-nav-link">Skills</a>
-                <a href="#projects" class="mobile-nav-link">Projects</a>
-                <a href="#certificates" class="mobile-nav-link">Achievements</a>
-                <a href="#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-menu-panel">
+                <a href="#about" class="mobile-nav-link"><i class="fa-regular fa-user" aria-hidden="true"></i><span>About</span></a>
+                <a href="#skills" class="mobile-nav-link"><i class="fa-solid fa-code" aria-hidden="true"></i><span>Skills</span></a>
+                <a href="#projects" class="mobile-nav-link"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span>Projects</span></a>
+                <a href="#certificates" class="mobile-nav-link"><i class="fa-solid fa-award" aria-hidden="true"></i><span>Achievements</span></a>
+                <a href="#contact" class="mobile-nav-link"><i class="fa-regular fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
                 <a href="image/resume/Resume.pdf" download class="mobile-nav-link mobile-nav-resume" aria-label="Download resume PDF">
                     Resume <i class="fa-solid fa-download" aria-hidden="true"></i>
                 </a>
@@ -250,7 +250,7 @@
                 </div>
             </div>
             
-            <div id="projects-container" class="space-y-16 md:space-y-20">
+            <div id="projects-container">
                 </div>
             <div class="more-projects-action">
                 <button id="open-more-projects" class="more-projects-button" type="button" aria-haspopup="dialog" aria-controls="more-projects-modal">
@@ -272,12 +272,22 @@
 
             <div class="certificate-carousel-shell">
             <article class="certificate-showcase">
+                <div class="certificate-visual-wrap">
                 <a id="certificate-image-link" class="certificate-visual" data-certificate-open href="image/certificate/programming-contest-first-place.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the First Place programming contest certificate viewer">
                     <span class="certificate-frame">
                         <img id="certificate-image" src="image/certificate/programming-contest-first-place.jpg" alt="Certificate of Appreciation for First Place in the Programming Contest Team Category during I.T. Days 2025" loading="lazy">
                     </span>
                     <span class="certificate-view-label"><i class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> View full certificate</span>
                 </a>
+                <div class="certificate-navigation" aria-label="Browse certificates">
+                    <button id="certificate-prev" class="certificate-nav-button" type="button" aria-label="Previous certificate">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    </button>
+                    <button id="certificate-next" class="certificate-nav-button" type="button" aria-label="Next certificate">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                </div>
 
                 <div class="certificate-copy">
                     <span id="certificate-index" class="certificate-index">01 / Achievement</span>
@@ -295,14 +305,6 @@
                     <span id="certificate-position" class="certificate-position" aria-live="polite">01 / 03</span>
                 </div>
             </article>
-            <div class="certificate-navigation" aria-label="Browse certificates">
-                <button id="certificate-prev" class="certificate-nav-button" type="button" aria-label="Previous certificate">
-                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                </button>
-                <button id="certificate-next" class="certificate-nav-button" type="button" aria-label="Next certificate">
-                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                </button>
-            </div>
             </div>
         </div>
     </section>
@@ -485,7 +487,7 @@
         </div>
     </footer>
     <script src="js/data.js?v=20261001-4"></script>
-    <script src="js/main.js?v=20261001-9"></script>
+    <script src="js/main.js?v=20261001-11"></script>
     <script src="js/pixel-cast.js?v=20260930-2"></script>
     <script src="character/crawler-loader.js?v=20260930-2"></script>
     <script src="robots/rust-guard-loader.js?v=20260930-1"></script>

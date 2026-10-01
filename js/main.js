@@ -361,6 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (moreProjectsGrid && Array.isArray(additionalProjectsData)) {
         moreProjectsGrid.innerHTML = additionalProjectsData.map((project, projectIndex) => {
             const badges = project.tech.map((technology) => `<span>${technology}</span>`).join('');
+            const githubUrl = project.githubUrl || 'https://github.com/jessiejames1234';
             const carouselId = `additional-carousel-${projectIndex}`;
             const slides = project.images.map((image, imageIndex) => `
                 <div class="additional-carousel-slide ${imageIndex === 0 ? 'is-active' : ''}" data-additional-carousel="${carouselId}" data-index="${imageIndex}">
@@ -390,8 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3>${project.title}</h3>
                         <p class="additional-project-description">${project.description}</p>
                         <div class="additional-project-tech" aria-label="${project.techLabel || 'Technologies used'}">${badges}</div>
-                        ${project.githubUrl ? `
-                        <a class="additional-project-github" href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" aria-label="View ${project.title} on GitHub in a new tab">
+                        ${githubUrl ? `
+                        <a class="additional-project-github" href="${githubUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub in a new tab">
                             <i class="fa-brands fa-github" aria-hidden="true"></i>
                             <span>View on GitHub</span>
                             <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>

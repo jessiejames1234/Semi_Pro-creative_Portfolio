@@ -3334,3 +3334,339 @@ html:not(.dark) .certificates-section { background: #f3f4f4; }
         min-height: 2.75rem;
     }
 }
+/* Scale the portrait action and project details to the available screen. */
+.profile-portrait-stage .crawler-arm-game-link,
+.profile-portrait-stage .crawler-arm-game-link:hover,
+.profile-portrait-stage .crawler-arm-game-link:focus-visible {
+    top: -1.75rem;
+    right: -.5rem;
+}
+
+@media (max-width: 1023px) {
+    .profile-portrait-stage-mobile .crawler-arm-game-link,
+    .profile-portrait-stage-mobile .crawler-arm-game-link:hover,
+    .profile-portrait-stage-mobile .crawler-arm-game-link:focus-visible {
+        top: -2.75rem;
+        right: -.4rem;
+        min-height: 1.85rem;
+        padding: .38rem .58rem;
+        font-size: .57rem;
+        line-height: 1.1;
+    }
+
+    .project-pixel-cast {
+        --pixel-cast-height: 6.25rem;
+        margin-bottom: .35rem;
+        padding: .15rem .5rem .1rem;
+    }
+    .project-pixel-actor[data-pixel-actor="one"] { height: 5.25rem; }
+    .project-pixel-actor[data-pixel-actor="two"] { height: 5.35rem; }
+    .project-pixel-cast-hint { top: 0; }
+
+    .skill-tile {
+        min-height: 3.5rem;
+        gap: .55rem;
+        padding: .55rem;
+    }
+    .skill-tile-icon {
+        width: 2.15rem;
+        height: 2.15rem;
+        flex-basis: 2.15rem;
+        font-size: 1.2rem;
+    }
+    .skill-tile-name {
+        font-size: .7rem;
+        overflow-wrap: anywhere;
+    }
+    .skill-category { margin-bottom: 1.75rem; }
+    .skill-category-header { margin-bottom: .8rem; padding-bottom: .7rem; }
+    .skill-category-symbol {
+        width: 2.4rem;
+        height: 2.4rem;
+        flex-basis: 2.4rem;
+    }
+    .skill-category-header h3 { font-size: 1rem; }
+}
+
+@media (max-width: 767px) {
+    #hero { padding-top: 8rem; }
+    .profile-portrait-stage-mobile .crawler-arm-game-link,
+    .profile-portrait-stage-mobile .crawler-arm-game-link:hover,
+    .profile-portrait-stage-mobile .crawler-arm-game-link:focus-visible {
+        top: -3.1rem;
+        right: -.35rem;
+        min-height: 1.65rem;
+        padding: .32rem .5rem;
+        font-size: .5rem;
+    }
+
+    .project-pixel-cast {
+        --pixel-cast-height: 5.5rem;
+        margin-bottom: .25rem;
+    }
+    .project-pixel-actor[data-pixel-actor="one"] { height: 4.6rem; }
+    .project-pixel-actor[data-pixel-actor="two"] { height: 4.7rem; }
+    .project-pixel-cast-hint { font-size: .52rem; }
+    .project-visual-index { display: none; }
+
+    .additional-project-image { height: clamp(9.5rem, 45vw, 12rem); }
+
+    .project-media-panel {
+        width: min(100%, 34rem);
+        min-width: 0;
+        max-height: calc(100dvh - 2rem);
+    }
+    .project-media-stage {
+        width: 100%;
+        min-width: 0;
+        max-height: min(62dvh, 34rem);
+    }
+    .project-media-stage img,
+    .project-media-stage video {
+        width: auto;
+        max-width: 100%;
+        max-height: min(62dvh, 34rem);
+    }
+    .project-media-stage video { width: 100%; }
+}
+
+@media (min-width: 640px) and (max-width: 900px) {
+    .additional-projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .additional-project-image { height: clamp(10rem, 25vw, 13rem); }
+}
+
+@media (max-width: 360px) {
+    .skill-tile { min-height: 3.25rem; gap: .4rem; padding: .45rem; }
+    .skill-tile-icon {
+        width: 1.9rem;
+        height: 1.9rem;
+        flex-basis: 1.9rem;
+        font-size: 1rem;
+    }
+    .skill-tile-name { font-size: .65rem; }
+}
+/* Keep long project titles and media inside the viewer on tablets too. */
+.project-media-panel,
+.project-media-toolbar,
+.project-media-stage { min-width: 0; }
+.project-media-panel,
+.project-media-stage { max-width: 100%; }
+.project-media-toolbar h2 { min-width: 0; flex: 1; }
+.project-media-stage { width: 100%; }
+
+@media (max-width: 1023px) {
+    #projects-container { gap: 4.5rem; }
+    .project-showcase::after { bottom: -2.25rem; }
+}
+
+@media (max-width: 767px) {
+    #hero { padding-top: 9rem; }
+    #projects-container { gap: 3.5rem; }
+    .project-showcase::after { bottom: -1.75rem; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    #hero { padding-top: 9rem; }
+}
+
+@media (max-width: 900px) {
+    .project-media-stage,
+    .project-media-stage img,
+    .project-media-stage video { max-height: min(65dvh, 32rem); }
+}
+
+@media (max-width: 767px) {
+    .project-media-stage,
+    .project-media-stage img,
+    .project-media-stage video { max-height: min(48dvh, 27rem); }
+}
+/* Keep the certificate controls on the certificate image at every width. */
+.certificate-visual-wrap {
+    position: relative;
+    min-width: 0;
+}
+.certificate-visual-wrap .certificate-navigation {
+    position: absolute;
+    inset: 0;
+    display: block;
+    margin: 0;
+    pointer-events: none;
+}
+.certificate-visual-wrap .certificate-nav-button,
+.certificate-visual-wrap .certificate-nav-button:hover,
+.certificate-visual-wrap .certificate-nav-button:focus-visible {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    width: 3rem;
+    height: 3rem;
+    pointer-events: auto;
+    transform: translateY(-50%);
+    background: rgba(10, 10, 10, .86);
+    border-color: rgba(255, 255, 255, .3);
+    color: #fff;
+    backdrop-filter: blur(6px);
+}
+.certificate-visual-wrap .certificate-nav-button:hover,
+.certificate-visual-wrap .certificate-nav-button:focus-visible {
+    background: #059669;
+    border-color: #059669;
+}
+.certificate-visual-wrap #certificate-prev { left: 1.25rem; }
+.certificate-visual-wrap #certificate-next { right: 1.25rem; }
+
+@media (max-width: 767px) {
+    .certificate-visual-wrap .certificate-nav-button,
+    .certificate-visual-wrap .certificate-nav-button:hover,
+    .certificate-visual-wrap .certificate-nav-button:focus-visible {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .certificate-visual-wrap #certificate-prev { left: .45rem; }
+    .certificate-visual-wrap #certificate-next { right: .45rem; }
+}
+
+/* Center both theme glyphs and give the mobile menu matching theme surfaces. */
+#theme-toggle,
+#theme-toggle-mobile {
+    display: inline-grid !important;
+    place-items: center;
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 !important;
+    line-height: 1;
+}
+#theme-icon,
+#theme-icon-mobile {
+    display: grid !important;
+    place-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0 !important;
+    font-size: 1.08rem;
+    line-height: 1;
+}
+#theme-icon::before,
+#theme-icon-mobile::before {
+    display: block;
+    line-height: 1;
+}
+#menu-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid #d9dddc;
+    border-radius: 50%;
+    background: #fafafa;
+}
+.dark #menu-toggle {
+    border-color: #2a2a2a;
+    background: #000;
+    color: #fff;
+}
+#menu-icon { font-size: 1.1rem; line-height: 1; }
+#menu-toggle:focus-visible {
+    outline: 2px solid #059669;
+    outline-offset: 2px;
+}
+
+#mobile-menu { margin-top: .7rem; }
+#mobile-menu .mobile-menu-panel {
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+    padding: .45rem;
+    border: 1px solid #d9dddc;
+    border-radius: .9rem;
+    background: #fafafa;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .13);
+}
+.dark #mobile-menu .mobile-menu-panel {
+    border-color: #2a2a2a;
+    background: #000;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+}
+#mobile-menu .mobile-nav-link:not(.mobile-nav-resume) {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    min-height: 2.75rem;
+    padding: .65rem .8rem;
+    border-radius: .55rem;
+    color: #334155;
+    font-size: .88rem;
+    font-weight: 600;
+}
+.dark #mobile-menu .mobile-nav-link:not(.mobile-nav-resume) { color: #e5e7eb; }
+#mobile-menu .mobile-nav-link:not(.mobile-nav-resume):hover,
+#mobile-menu .mobile-nav-link:not(.mobile-nav-resume):focus-visible {
+    background: rgba(5, 150, 105, .09);
+    color: #059669;
+}
+#mobile-menu .mobile-nav-link:not(.mobile-nav-resume) i {
+    width: 1.1rem;
+    flex: none;
+    color: #64748b;
+    text-align: center;
+}
+.dark #mobile-menu .mobile-nav-link:not(.mobile-nav-resume) i { color: #a3a3a3; }
+#mobile-menu .mobile-nav-resume,
+.dark #mobile-menu .mobile-nav-resume {
+    min-height: 2.75rem;
+    margin: .45rem .2rem .15rem;
+    border: 1px solid #059669 !important;
+    border-radius: .6rem;
+    background: #059669 !important;
+    color: #fff !important;
+    font-size: .8rem;
+}
+
+.profile-portrait-stage .crawler-arm-game-link,
+.profile-portrait-stage .crawler-arm-game-link:hover,
+.profile-portrait-stage .crawler-arm-game-link:focus-visible {
+    top: -.9rem;
+}
+@media (max-width: 1023px) {
+    .profile-portrait-stage-mobile .crawler-arm-game-link,
+    .profile-portrait-stage-mobile .crawler-arm-game-link:hover,
+    .profile-portrait-stage-mobile .crawler-arm-game-link:focus-visible {
+        top: -2.3rem;
+    }
+}
+/* Two project actions stay on one row on phones; a single action fills the row. */
+@media (max-width: 480px) {
+    .project-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .5rem;
+    }
+    .project-actions > :only-child { grid-column: 1 / -1; }
+    .project-actions .project-github-link,
+    .project-actions .project-play-link {
+        gap: .25rem;
+        min-height: 2.75rem;
+        padding: .55rem .3rem;
+        font-size: clamp(.53rem, 2.2vw, .65rem);
+        line-height: 1.15;
+        white-space: nowrap;
+    }
+    .project-actions .project-play-link span { gap: .3rem; }
+}
+/* Keep the desktop pixel characters close to their own game preview. */
+@media (min-width: 1024px) {
+    .project-pixel-cast {
+        --pixel-cast-height: 7.5rem;
+        bottom: calc(100% + .5rem);
+    }
+    .project-pixel-cast-hint { top: .6rem; }
+}
+/* Give the desktop pixel cast a readable size without the divider behind it. */
+@media (min-width: 1024px) {
+    .project-pixel-cast { --pixel-cast-height: 12rem; }
+    .project-showcase:first-child::after { display: none; }
+}
