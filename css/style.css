@@ -3170,3 +3170,167 @@ html:not(.dark) .certificates-section { background: #f3f4f4; }
     .project-media-prev { left: .25rem; }
     .project-media-next { right: .25rem; }
 }
+/* Phone and tablet layouts: keep content and controls inside the viewport. */
+@media (max-width: 1023px) {
+    #hero {
+        min-height: 100svh;
+        padding-top: 7rem;
+        padding-bottom: 3rem;
+    }
+    #hero > div, #hero > div > div { min-width: 0; }
+    #hero .profile-portrait-stage-mobile { width: clamp(10.5rem, 28vw, 14rem); }
+    #hero h2 {
+        height: auto;
+        min-height: 2.5rem;
+        overflow-wrap: anywhere;
+    }
+    .project-showcase, .project-copy, .project-visual-wrap { min-width: 0; }
+    .project-carousel-arrow {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+}
+
+@media (max-width: 900px) {
+    .certificate-showcase { grid-template-columns: minmax(0, 1fr); }
+    .certificate-navigation {
+        position: static;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        pointer-events: auto;
+    }
+    .certificate-nav-button,
+    .certificate-nav-button:hover,
+    .certificate-nav-button:focus-visible {
+        position: static;
+        transform: none;
+    }
+}
+
+@media (max-width: 767px) {
+    #navbar { padding-inline: 1rem; }
+    #navbar > .flex { padding-right: 6rem; }
+    #theme-toggle-mobile, #menu-toggle { min-width: 2.75rem; min-height: 2.75rem; }
+    #mobile-menu {
+        max-height: calc(100dvh - 5rem);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+    #hero { padding-inline: 1rem; }
+    #hero .profile-portrait-stage-mobile { width: clamp(10.5rem, 44vw, 13rem); }
+    #hero h1 { font-size: clamp(2rem, 9vw, 3.1rem); }
+    #hero h2 { font-size: clamp(1.05rem, 5vw, 1.5rem); }
+    #about, #skills, #projects, #certificates, #contact { padding-inline: 1rem; }
+    .contact-section-heading .section-title,
+    .certificate-heading .section-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+        overflow-wrap: anywhere;
+    }
+    .project-pixel-cast { --pixel-cast-height: 8rem; }
+    .project-visual-wrap::before,
+    .project-showcase-reverse .project-visual-wrap::before { display: none; }
+    .project-window-bar { min-height: 2.5rem; padding-inline: .75rem; }
+    .project-carousel.aspect-video { min-height: 11rem; }
+    .project-carousel-arrow,
+    .additional-carousel-arrow { width: 2.75rem; height: 2.75rem; }
+    .project-carousel-prev { left: .5rem; }
+    .project-carousel-next { right: .5rem; }
+    .project-media-view-label {
+        top: .6rem;
+        right: .6rem;
+        bottom: auto;
+        padding: .4rem .55rem;
+        font-size: .58rem;
+    }
+    .project-carousel-dots { bottom: .5rem; }
+
+    .additional-projects-modal {
+        padding: max(.5rem, env(safe-area-inset-top)) .5rem max(.5rem, env(safe-area-inset-bottom));
+    }
+    .additional-projects-panel { max-height: 100dvh; }
+    .additional-projects-header,
+    .additional-projects-grid { padding: .875rem; }
+    .additional-project-image { height: clamp(11rem, 56vw, 16rem); }
+    .additional-project-content { padding: 1rem; }
+    .additional-projects-header button,
+    .more-projects-button,
+    .additional-project-github { min-height: 2.75rem; }
+    .additional-projects-header button { flex-basis: 2.75rem; width: 2.75rem; }
+
+    .certificate-nav-button { width: 2.75rem; height: 2.75rem; }
+    .certificate-copy h3 { overflow-wrap: anywhere; }
+    .certificate-modal-arrow,
+    .project-media-arrow { width: 2.75rem; height: 2.75rem; }
+    .certificate-modal-panel img { max-height: calc(100dvh - 7rem); }
+
+    .project-media-panel { max-height: calc(100dvh - 1rem); }
+    .project-media-toolbar h2 { min-width: 0; }
+    .project-media-stage img,
+    .project-media-stage video { max-height: calc(100dvh - 8rem); }
+}
+
+@media (max-width: 480px) {
+    .project-actions { grid-template-columns: minmax(0, 1fr); }
+    .project-title { overflow-wrap: anywhere; }
+    .project-card-footer { flex-wrap: wrap; }
+    .project-media-view-label,
+    .additional-media-view-label { font-size: .55rem; }
+    .certificate-view-label {
+        right: .55rem;
+        bottom: .55rem;
+        padding: .4rem .5rem;
+        font-size: .56rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .skill-tile { gap: .45rem; padding: .55rem; }
+    .skill-tile-icon {
+        width: 2.1rem;
+        height: 2.1rem;
+        flex-basis: 2.1rem;
+        font-size: 1.15rem;
+    }
+    .skill-tile-name { font-size: .68rem; overflow-wrap: anywhere; }
+    #navbar > .flex > a { font-size: 1.1rem; }
+    #hero .portfolio-button { padding-inline: 1rem; }
+}
+/* Larger hit areas for the tiny carousel indicators on touch screens. */
+@media (hover: none), (pointer: coarse) {
+    .carousel-dot,
+    .additional-carousel-dot {
+        position: relative;
+        width: 1.25rem;
+        height: 1.5rem;
+        background: transparent;
+    }
+    .carousel-dot.is-active,
+    .additional-carousel-dot.is-active {
+        width: 1.25rem;
+        background: transparent;
+    }
+    .carousel-dot::after,
+    .additional-carousel-dot::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: .45rem;
+        height: .45rem;
+        border-radius: 999px;
+        background: #737373;
+        transform: translate(-50%, -50%);
+    }
+    .carousel-dot.is-active::after,
+    .additional-carousel-dot.is-active::after {
+        width: .9rem;
+        background: #059669;
+    }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    #theme-toggle-mobile, #menu-toggle {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+    }
+}

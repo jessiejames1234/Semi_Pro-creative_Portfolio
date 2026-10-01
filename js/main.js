@@ -109,24 +109,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.getElementById('mobile-menu');
 
     if (menuToggle && mobileMenu) {
+        const setMobileMenuOpen = (isOpen) => {
+            mobileMenu.classList.toggle('hidden', !isOpen);
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            menuIcon.classList.toggle('fa-xmark', isOpen);
+            menuIcon.classList.toggle('fa-bars', !isOpen);
+        };
+
+        setMobileMenuOpen(false);
         menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            if (mobileMenu.classList.contains('hidden')) {
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-            } else {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-xmark');
+            setMobileMenuOpen(mobileMenu.classList.contains('hidden'));
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMobileMenuOpen(false));
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                setMobileMenuOpen(false);
+                menuToggle.focus();
             }
         });
-
-        // Close mobile menu when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-            });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) setMobileMenuOpen(false);
         });
     }
 
