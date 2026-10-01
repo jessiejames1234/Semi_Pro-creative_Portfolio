@@ -110,6 +110,19 @@ const projectsData = [
 
 const additionalProjectsData = [
     {
+        title: "I.T. Event Management & Attendance Platform",
+        type: "Student Event Management System",
+        images: [
+            "image/new-project-1/Screenshot 2026-10-01 191130.png",
+            "image/new-project-1/Screenshot 2026-10-01 191141.png",
+            "image/new-project-1/Screenshot 2026-10-01 191157.png",
+            "image/new-project-1/Screenshot 2026-10-01 191229.png",
+            "image/new-project-1/Screenshot 2026-10-01 191242.png"
+        ],
+        tech: ["PHP", "JavaScript", "CSS", "Tailwind", "HTML", "Visual Studio", "MySQL", "Git"],
+        description: "Built a student event platform where administrators publish events and announcements, SBO officers scan student QR codes for attendance, and organizers manage tribe scores and leaderboards. Each scan records the officer's GPS location, with attendance activity visible on a map."
+    },
+    {
         title: "Bakeshop Cashiering App",
         type: "Mobile Point-of-Sale Application",
         images: [
@@ -136,15 +149,37 @@ const additionalProjectsData = [
     },
     {
         title: "Shoe Store Point-of-Sale System",
-        type: "Web-Based Retail System",
+        type: "Web-Based Retail Point-of-Sale",
         images: [
-            "image/shoe point of sale/Screenshot 2026-08-31 185928.png",
-            "image/shoe point of sale/Screenshot 2026-08-31 185908.png",
-            "image/shoe point of sale/Screenshot 2026-08-31 185834.png",
-            "image/shoe point of sale/Screenshot 2026-08-31 185812.png"
+            "image/new-project-2/Screenshot 2026-10-01 193142.png",
+            "image/new-project-2/Screenshot 2026-10-01 194052.png",
+            "image/new-project-2/Screenshot 2026-10-01 194104.png",
+            "image/new-project-2/Screenshot 2026-10-01 194117.png"
         ],
-        tech: ["PHP", "JavaScript", "CSS", "HTML", "Visual Studio", "MySQL", "Git"],
-        githubUrl: "https://github.com/jessiejames1234",
-        description: "A web-based retail point-of-sale system designed to simplify shoe product selection, checkout processing, and the organization of sales information."
+        tech: ["PHP", "CSS", "HTML", "Visual Studio", "MySQL", "Git"],
+        description: "Developed a web-based shoe store POS with product and brand management, stock controls, and a cashier flow for selecting shoe sizes and colors before checkout."
+    },
+    {
+        title: "Bakeshop Point-of-Sale & Inventory System",
+        type: "Web-Based Bakeshop POS",
+        images: [
+            "image/shoe point of sale/Screenshot 2026-08-31 185834.png",
+            "image/shoe point of sale/Screenshot 2026-08-31 185812.png",
+            "image/shoe point of sale/Screenshot 2026-08-31 185908.png",
+            "image/shoe point of sale/Screenshot 2026-08-31 185928.png"
+        ],
+        tech: ["PHP", "CSS", "HTML", "Visual Studio", "MySQL", "Git"],
+        description: "Built a bakeshop POS for managing products and stock, processing cashier orders, and reviewing sales through dashboard reports."
+    },
+    {
+        title: "Movie Discovery & Rating App",
+        type: "Flutter Android Application",
+        images: [
+            "image/new-project-3/3.jpg",
+            "image/new-project-3/2.jpg",
+            "image/new-project-3/1.jpg"
+        ],
+        tech: ["Flutter", "Git", "Visual Studio Code", "Android"],
+        description: "Created a movie discovery app with poster-based previews and film details. Users can search titles, browse categories, save favorites, and rate movies."
     }
 ];

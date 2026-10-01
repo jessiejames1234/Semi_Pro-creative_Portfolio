@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     
-    <link rel="stylesheet" href="css/style.css?v=20260930-25">
+    <link rel="stylesheet" href="css/style.css?v=20261001-6">
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-slate-800 dark:text-slate-200 font-sans antialiased overflow-x-hidden transition-colors duration-500">
 
@@ -72,7 +72,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5 px-6 lg:px-24 border-b border-transparent">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5 px-6 lg:px-10 xl:px-24 border-b border-transparent">
         <div class="scroll-progress-track" aria-hidden="true">
             <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
         </div>
@@ -82,10 +82,11 @@
             </a>
             
             <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+            <div class="hidden lg:flex items-center space-x-4 xl:space-x-8 text-sm font-medium">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
+                <a href="#certificates" class="nav-link">Achievements</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 <a href="image/resume/Resume.pdf" download class="nav-resume-button" aria-label="Download resume PDF">
                     Resume <i class="fa-solid fa-download" aria-hidden="true"></i>
@@ -97,7 +98,7 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <div class="flex md:hidden items-center gap-2 mobile-nav-controls">
+            <div class="flex lg:hidden items-center gap-2 mobile-nav-controls">
                 <button id="theme-toggle-mobile" class="theme-toggle-control p-2 rounded-full transition-all duration-300" aria-label="Switch color theme">
                     <i id="theme-icon-mobile" class="fa-solid fa-moon w-5 h-5 flex items-center justify-center"></i>
                 </button>
@@ -108,11 +109,12 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+        <div id="mobile-menu" class="lg:hidden hidden mt-4 pb-4">
             <div class="flex flex-col space-y-2 bg-card-light dark:bg-card-dark rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl p-4">
                 <a href="#about" class="mobile-nav-link">About</a>
                 <a href="#skills" class="mobile-nav-link">Skills</a>
                 <a href="#projects" class="mobile-nav-link">Projects</a>
+                <a href="#certificates" class="mobile-nav-link">Achievements</a>
                 <a href="#contact" class="mobile-nav-link">Contact</a>
                 <a href="image/resume/Resume.pdf" download class="mobile-nav-link mobile-nav-resume" aria-label="Download resume PDF">
                     Resume <i class="fa-solid fa-download" aria-hidden="true"></i>
@@ -259,6 +261,52 @@
         </div>
     </section>
 
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates-section relative z-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="certificate-heading">
+                <span class="section-eyebrow"><i class="fa-solid fa-award" aria-hidden="true"></i> Recognition</span>
+                <h2 class="section-title">Certificates &amp; <span class="text-brand">Achievements</span></h2>
+                <p>Selected recognition earned through programming, teamwork, and practical problem solving.</p>
+            </header>
+
+            <div class="certificate-carousel-shell">
+            <article class="certificate-showcase">
+                <a id="certificate-image-link" class="certificate-visual" data-certificate-open href="image/certificate/programming-contest-first-place.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the First Place programming contest certificate viewer">
+                    <span class="certificate-frame">
+                        <img id="certificate-image" src="image/certificate/programming-contest-first-place.jpg" alt="Certificate of Appreciation for First Place in the Programming Contest Team Category during I.T. Days 2025" loading="lazy">
+                    </span>
+                    <span class="certificate-view-label"><i class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> View full certificate</span>
+                </a>
+
+                <div class="certificate-copy">
+                    <span id="certificate-index" class="certificate-index">01 / Achievement</span>
+                    <h3 id="certificate-title">First Place — Programming Contest</h3>
+                    <p class="certificate-meta"><i id="certificate-meta-icon" class="fa-solid fa-people-group" aria-hidden="true"></i> <span id="certificate-category">Team Category</span> <span class="certificate-meta-separator" aria-hidden="true"></span> <span id="certificate-event">I.T. Days 2025</span></p>
+                    <p id="certificate-description">Recognized for collective programming skill, strategy, and teamwork during the I.T. Days 2025 programming competition.</p>
+                    <div id="certificate-tags" class="certificate-tags" aria-label="Achievement highlights">
+                        <span>Programming</span>
+                        <span>Problem Solving</span>
+                        <span>Teamwork</span>
+                    </div>
+                    <a id="certificate-open-link" class="certificate-open-link" data-certificate-open href="image/certificate/programming-contest-first-place.jpg" target="_blank" rel="noopener noreferrer">
+                        Open certificate <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    </a>
+                    <span id="certificate-position" class="certificate-position" aria-live="polite">01 / 03</span>
+                </div>
+            </article>
+            <div class="certificate-navigation" aria-label="Browse certificates">
+                <button id="certificate-prev" class="certificate-nav-button" type="button" aria-label="Previous certificate">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                </button>
+                <button id="certificate-next" class="certificate-nav-button" type="button" aria-label="Next certificate">
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="relative z-10 px-6 contact-redesign">
         <div class="contact-grid-pattern" aria-hidden="true"></div>
@@ -373,6 +421,22 @@
         </div>
     </section>
 
+    <div id="certificate-modal" class="certificate-modal hidden" role="dialog" aria-modal="true" aria-labelledby="certificate-modal-title">
+        <div class="certificate-modal-panel">
+            <h2 id="certificate-modal-title" class="sr-only">First Place Programming Contest Certificate</h2>
+            <button id="close-certificate-modal" class="certificate-modal-close" type="button" aria-label="Close certificate viewer">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <img id="certificate-modal-image" src="image/certificate/programming-contest-first-place.jpg" alt="Certificate of Appreciation for First Place in the Programming Contest Team Category during I.T. Days 2025">
+            <button id="certificate-modal-prev" class="certificate-modal-arrow certificate-modal-arrow-prev" type="button" aria-label="Previous certificate">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button id="certificate-modal-next" class="certificate-modal-arrow certificate-modal-arrow-next" type="button" aria-label="Next certificate">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Additional Projects Dialog -->
     <div id="more-projects-modal" class="additional-projects-modal hidden" role="dialog" aria-modal="true" aria-labelledby="more-projects-title">
         <div class="additional-projects-panel">
@@ -389,6 +453,29 @@
         </div>
     </div>
 
+    <!-- Full-size project image and video viewer -->
+    <div id="project-media-modal" class="project-media-modal hidden" role="dialog" aria-modal="true" aria-labelledby="project-media-title">
+        <div class="project-media-panel">
+            <div class="project-media-toolbar">
+                <h2 id="project-media-title">Project media</h2>
+                <button id="close-project-media" class="project-media-close" type="button" aria-label="Close project media viewer">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="project-media-stage">
+                <img id="project-media-image" alt="" hidden>
+                <video id="project-media-video" controls playsinline preload="metadata" hidden></video>
+                <button id="project-media-prev" class="project-media-arrow project-media-prev" type="button" aria-label="Previous project media">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button id="project-media-next" class="project-media-arrow project-media-next" type="button" aria-label="Next project media">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p id="project-media-counter" class="project-media-counter" aria-live="polite"></p>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="creative-footer relative z-10 px-6">
         <div class="max-w-7xl mx-auto creative-footer-inner">
@@ -397,8 +484,8 @@
             <a href="#hero" class="footer-back-top" aria-label="Back to top">Back to top <i class="fa-solid fa-arrow-up"></i></a>
         </div>
     </footer>
-    <script src="js/data.js?v=20260901-2"></script>
-    <script src="js/main.js?v=20260930-6"></script>
+    <script src="js/data.js?v=20261001-4"></script>
+    <script src="js/main.js?v=20261001-8"></script>
     <script src="js/pixel-cast.js?v=20260930-2"></script>
     <script src="character/crawler-loader.js?v=20260930-2"></script>
     <script src="robots/rust-guard-loader.js?v=20260930-1"></script>

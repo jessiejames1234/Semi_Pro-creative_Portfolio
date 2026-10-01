@@ -301,6 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div id="${carouselId}" class="project-carousel w-full ${aspectClass} relative flex items-center justify-center">
                         ${imagesHtml}
                         ${videoPreviewHtml}
+                        <button class="project-media-open" type="button" data-project-media-open data-project-kind="featured" data-project-index="${index}" aria-label="View ${project.title} media full size"></button>
+                        <span class="project-media-view-label" aria-hidden="true"><i class="fa-solid fa-up-right-and-down-left-from-center"></i> View full</span>
                     </div>
                     <button class="carousel-prev project-carousel-arrow project-carousel-prev" data-carousel="${carouselId}" aria-label="Previous project image">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -357,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const carouselId = `additional-carousel-${projectIndex}`;
             const slides = project.images.map((image, imageIndex) => `
                 <div class="additional-carousel-slide ${imageIndex === 0 ? 'is-active' : ''}" data-additional-carousel="${carouselId}" data-index="${imageIndex}">
-                    <img src="${image}" alt="${project.title} interface screenshot ${imageIndex + 1}">
+                    <img src="${image}" alt="${project.title} interface screenshot ${imageIndex + 1}" loading="lazy">
                 </div>
             `).join('');
             const dots = project.images.map((_, imageIndex) => `
@@ -368,6 +370,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <article class="additional-project-card">
                     <div id="${carouselId}" class="additional-project-image" data-current="0">
                         ${slides}
+                        <button class="project-media-open additional-media-open" type="button" data-project-media-open data-project-kind="additional" data-project-index="${projectIndex}" aria-label="View ${project.title} image full size"></button>
+                        <span class="project-media-view-label additional-media-view-label" aria-hidden="true"><i class="fa-solid fa-up-right-and-down-left-from-center"></i> View full</span>
                         <button class="additional-carousel-arrow additional-carousel-prev" type="button" data-additional-carousel="${carouselId}" aria-label="Previous ${project.title} image">
                             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
                         </button>
@@ -380,12 +384,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="additional-project-type">${project.type}</p>
                         <h3>${project.title}</h3>
                         <p class="additional-project-description">${project.description}</p>
-                        <div class="additional-project-tech" aria-label="Technologies used">${badges}</div>
+                        <div class="additional-project-tech" aria-label="${project.techLabel || 'Technologies used'}">${badges}</div>
+                        ${project.githubUrl ? `
                         <a class="additional-project-github" href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" aria-label="View ${project.title} on GitHub in a new tab">
                             <i class="fa-brands fa-github" aria-hidden="true"></i>
                             <span>View on GitHub</span>
                             <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        </a>
+                        </a>` : ''}
                     </div>
                 </article>
             `;
@@ -449,6 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!moreProjectsModal) return;
         modalTrigger = document.activeElement;
         moreProjectsModal.classList.remove('hidden');
+        moreProjectsModal.querySelector('.additional-projects-panel').scrollTop = 0;
         document.documentElement.classList.add('modal-open');
         document.body.classList.add('modal-open');
         startAdditionalCarouselAutoplay();
@@ -470,9 +476,135 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target === moreProjectsModal) closeMoreProjectsModal();
     });
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && moreProjectsModal && !moreProjectsModal.classList.contains('hidden')) {
+        if (event.key === 'Escape' && moreProjectsModal && !moreProjectsModal.classList.contains('hidden')
+            && document.getElementById('project-media-modal')?.classList.contains('hidden')) {
             closeMoreProjectsModal();
         }
+    });
+
+    // --- Certificate Carousel and Image Viewer ---
+    const certificates = [
+        {
+            image: 'image/certificate/programming-contest-first-place.jpg',
+            alt: 'Certificate of Appreciation for First Place in the Programming Contest Team Category during I.T. Days 2025',
+            title: 'First Place — Programming Contest',
+            category: 'Team Category',
+            event: 'I.T. Days 2025',
+            icon: 'fa-solid fa-people-group',
+            description: 'Recognized for collective programming skill, strategy, and teamwork during the I.T. Days 2025 programming competition.',
+            tags: ['Programming', 'Problem Solving', 'Teamwork']
+        },
+        {
+            image: 'image/certificate/programming-contest-first-runner-up.jpg',
+            alt: 'Certificate of Appreciation for First Runner-Up in the Programming Contest during I.T. Days 2026',
+            title: 'First Runner-Up — Programming Contest',
+            category: 'Programming Contest',
+            event: 'I.T. Days 2026',
+            icon: 'fa-solid fa-code',
+            description: 'Recognized for programming skill and outstanding performance in the I.T. Days 2026 contest.',
+            tags: ['Programming', 'Problem Solving', 'Competition']
+        },
+        {
+            image: 'image/certificate/chess-2nd-runner-up.jpg',
+            alt: 'Certificate of Appreciation for Second Runner-Up in Chess during I.T. Days 2026',
+            title: 'Second Runner-Up — Chess',
+            category: 'Chess',
+            event: 'I.T. Days 2026',
+            icon: 'fa-solid fa-chess-knight',
+            description: 'Recognized for a second runner-up finish in the I.T. Days 2026 chess competition.',
+            tags: ['Chess', 'Strategy', 'Competition']
+        }
+    ];
+    const certificateModal = document.getElementById('certificate-modal');
+    const certificateImage = document.getElementById('certificate-image');
+    const certificateModalImage = document.getElementById('certificate-modal-image');
+    const certificateTitle = document.getElementById('certificate-title');
+    const certificateModalTitle = document.getElementById('certificate-modal-title');
+    const certificateOpeners = document.querySelectorAll('[data-certificate-open]');
+    const closeCertificateModalButton = document.getElementById('close-certificate-modal');
+    let certificateIndex = 0;
+    let certificateTimer;
+    let certificateModalTrigger = null;
+
+    function renderCertificate(index) {
+        certificateIndex = (index + certificates.length) % certificates.length;
+        const item = certificates[certificateIndex];
+        certificateImage.src = item.image;
+        certificateImage.alt = item.alt;
+        certificateModalImage.src = item.image;
+        certificateModalImage.alt = item.alt;
+        certificateTitle.textContent = item.title;
+        certificateModalTitle.textContent = item.title + ' Certificate';
+        document.getElementById('certificate-index').textContent =
+            String(certificateIndex + 1).padStart(2, '0') + ' / Achievement';
+        document.getElementById('certificate-position').textContent =
+            String(certificateIndex + 1).padStart(2, '0') + ' / ' + String(certificates.length).padStart(2, '0');
+        document.getElementById('certificate-category').textContent = item.category;
+        document.getElementById('certificate-event').textContent = item.event;
+        document.getElementById('certificate-meta-icon').className = item.icon;
+        document.getElementById('certificate-description').textContent = item.description;
+        document.getElementById('certificate-tags').replaceChildren(
+            ...item.tags.map((tag) => {
+                const label = document.createElement('span');
+                label.textContent = tag;
+                return label;
+            })
+        );
+        certificateOpeners.forEach((opener) => {
+            opener.href = item.image;
+            opener.setAttribute('aria-label', 'Open ' + item.title + ' certificate viewer');
+        });
+    }
+
+    function startCertificateAutoplay() {
+        window.clearInterval(certificateTimer);
+        certificateTimer = window.setInterval(() => {
+            if (!document.hidden) renderCertificate(certificateIndex + 1);
+        }, 5000);
+    }
+
+    function showCertificate(index) {
+        renderCertificate(index);
+        startCertificateAutoplay();
+    }
+
+    document.getElementById('certificate-prev')?.addEventListener('click', () => showCertificate(certificateIndex - 1));
+    document.getElementById('certificate-next')?.addEventListener('click', () => showCertificate(certificateIndex + 1));
+    document.getElementById('certificate-modal-prev')?.addEventListener('click', () => showCertificate(certificateIndex - 1));
+    document.getElementById('certificate-modal-next')?.addEventListener('click', () => showCertificate(certificateIndex + 1));
+    renderCertificate(0);
+    startCertificateAutoplay();
+
+    function openCertificateModal(event) {
+        if (!certificateModal) return;
+        event.preventDefault();
+        certificateModalTrigger = event.currentTarget;
+        certificateModal.classList.remove('hidden');
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+        closeCertificateModalButton?.focus();
+    }
+
+    function closeCertificateModal() {
+        if (!certificateModal) return;
+        certificateModal.classList.add('hidden');
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+        certificateModalTrigger?.focus();
+    }
+
+    certificateOpeners.forEach((opener) => opener.addEventListener('click', openCertificateModal));
+    closeCertificateModalButton?.addEventListener('click', closeCertificateModal);
+    certificateModal?.addEventListener('click', (event) => {
+        if (event.target === certificateModal || event.target.classList.contains('certificate-modal-panel')) {
+            closeCertificateModal();
+        }
+    });
+    document.addEventListener('keydown', (event) => {
+        if (!certificateModal || certificateModal.classList.contains('hidden')) return;
+        if (event.key === 'Escape') closeCertificateModal();
+        if (event.key === 'ArrowLeft') showCertificate(certificateIndex - 1);
+        if (event.key === 'ArrowRight') showCertificate(certificateIndex + 1);
     });
 
     // --- Carousel Navigation with Auto-Play ---
@@ -566,7 +698,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hoverVideo) {
                 previewRequested = true;
                 hoverVideo.play().then(() => {
-                    if (previewRequested) container.classList.add('is-video-playing');
+                    if (previewRequested && document.getElementById('project-media-modal')?.classList.contains('hidden')) {
+                        container.classList.add('is-video-playing');
+                    }
                 }).catch(() => {
                     container.classList.remove('is-video-playing');
                 });
@@ -580,6 +714,121 @@ document.addEventListener('DOMContentLoaded', () => {
                 hoverVideo.currentTime = 0;
             }
         });
+    });
+
+    // --- Full-Size Viewer for Featured and Additional Project Media ---
+    const projectMediaModal = document.getElementById('project-media-modal');
+    const projectMediaImage = document.getElementById('project-media-image');
+    const projectMediaVideo = document.getElementById('project-media-video');
+    const projectMediaTitle = document.getElementById('project-media-title');
+    const projectMediaCounter = document.getElementById('project-media-counter');
+    let projectMediaItems = [];
+    let projectMediaIndex = 0;
+    let projectMediaTrigger = null;
+    let projectMediaCarouselId = null;
+
+    function renderProjectMedia() {
+        const item = projectMediaItems[projectMediaIndex];
+        if (!item) return;
+        projectMediaVideo.pause();
+        projectMediaVideo.removeAttribute('src');
+        projectMediaVideo.load();
+        projectMediaImage.hidden = item.type !== 'image';
+        projectMediaVideo.hidden = item.type !== 'video';
+        if (item.type === 'video') {
+            projectMediaVideo.src = item.src;
+            projectMediaVideo.load();
+            projectMediaVideo.play().catch(() => {});
+        } else {
+            projectMediaImage.src = item.src;
+            projectMediaImage.alt = item.alt;
+        }
+        projectMediaCounter.textContent =
+            String(projectMediaIndex + 1).padStart(2, '0') + ' / ' +
+            String(projectMediaItems.length).padStart(2, '0') +
+            (item.type === 'video' ? ' - Video' : '');
+    }
+
+    function moveProjectMedia(direction) {
+        if (!projectMediaItems.length) return;
+        projectMediaIndex = (projectMediaIndex + direction + projectMediaItems.length) % projectMediaItems.length;
+        renderProjectMedia();
+    }
+
+    function openProjectMedia(trigger) {
+        const isFeatured = trigger.dataset.projectKind === 'featured';
+        const projectIndex = Number(trigger.dataset.projectIndex);
+        const project = isFeatured ? projectsData[projectIndex] : additionalProjectsData[projectIndex];
+        if (!project || !projectMediaModal) return;
+
+        projectMediaItems = project.images.map((src, index) => ({
+            type: 'image',
+            src,
+            alt: project.title + ' image ' + (index + 1)
+        }));
+        if (isFeatured && project.video) {
+            projectMediaItems.push({ type: 'video', src: project.video });
+        }
+        projectMediaCarouselId = isFeatured ? 'carousel-' + projectIndex : null;
+        const carousel = document.getElementById(
+            isFeatured ? projectMediaCarouselId : 'additional-carousel-' + projectIndex
+        );
+        const previewPlaying = isFeatured && carousel?.classList.contains('is-video-playing');
+        projectMediaIndex = previewPlaying ? projectMediaItems.length - 1 : Number(carousel?.dataset.current || 0);
+        if (isFeatured) {
+            stopCarouselTimer(projectMediaCarouselId);
+            const preview = carousel?.querySelector('.project-hover-video');
+            preview?.pause();
+            carousel?.classList.remove('is-video-playing');
+        } else {
+            stopAdditionalCarouselAutoplay();
+            moreProjectsModal.inert = true;
+        }
+        projectMediaTrigger = trigger;
+        projectMediaTitle.textContent = project.title;
+        projectMediaModal.classList.remove('hidden');
+        renderProjectMedia();
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+        document.getElementById('close-project-media')?.focus();
+    }
+
+    function closeProjectMedia() {
+        if (!projectMediaModal || projectMediaModal.classList.contains('hidden')) return;
+        projectMediaModal.classList.add('hidden');
+        projectMediaVideo.pause();
+        projectMediaVideo.removeAttribute('src');
+        projectMediaVideo.load();
+        projectMediaImage.removeAttribute('src');
+        if (moreProjectsModal && !moreProjectsModal.classList.contains('hidden')) {
+            moreProjectsModal.inert = false;
+            startAdditionalCarouselAutoplay();
+        } else {
+            document.documentElement.classList.remove('modal-open');
+            document.body.classList.remove('modal-open');
+        }
+        if (projectMediaCarouselId) scheduleCarousel(projectMediaCarouselId);
+        projectMediaTrigger?.focus();
+        projectMediaCarouselId = null;
+    }
+
+    document.addEventListener('click', (event) => {
+        const trigger = event.target.closest('[data-project-media-open]');
+        if (trigger) openProjectMedia(trigger);
+    });
+    document.getElementById('close-project-media')?.addEventListener('click', closeProjectMedia);
+    document.getElementById('project-media-prev')?.addEventListener('click', () => moveProjectMedia(-1));
+    document.getElementById('project-media-next')?.addEventListener('click', () => moveProjectMedia(1));
+    projectMediaModal?.addEventListener('click', (event) => {
+        if (event.target === projectMediaModal || event.target.classList.contains('project-media-panel')) {
+            closeProjectMedia();
+        }
+    });
+    document.addEventListener('keydown', (event) => {
+        if (!projectMediaModal || projectMediaModal.classList.contains('hidden')) return;
+        if (event.key === 'Escape') closeProjectMedia();
+        if (event.key === 'ArrowLeft') moveProjectMedia(-1);
+        if (event.key === 'ArrowRight') moveProjectMedia(1);
     });
 
     // --- 4. Navbar Scroll Effect ---
