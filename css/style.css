@@ -3670,3 +3670,39 @@ html:not(.dark) .certificates-section { background: #f3f4f4; }
     .project-pixel-cast { --pixel-cast-height: 12rem; }
     .project-showcase:first-child::after { display: none; }
 }
+
+/* Direct access to the growing certificate collection. */
+.certificate-browser {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.certificate-browser label {
+    color: #475569;
+    font-size: .85rem;
+    font-weight: 700;
+}
+.certificate-browser select {
+    width: 100%;
+    max-width: 30rem;
+    min-width: 0;
+    padding: .8rem 1rem;
+    border: 1px solid #cad7d3;
+    border-radius: .7rem;
+    background: #fafafa;
+    color: #0f172a;
+    font: inherit;
+    font-size: .9rem;
+}
+.certificate-browser select:focus-visible {
+    outline: 3px solid #059669;
+    outline-offset: 3px;
+}
+.dark .certificate-browser label { color: #a3a3a3; }
+.dark .certificate-browser select {
+    border-color: #314158;
+    background: #141414;
+    color: #f8fafc;
+}

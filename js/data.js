@@ -183,3 +183,107 @@ const additionalProjectsData = [
         description: "Created a movie discovery app with poster-based previews and film details. Users can search titles, browse categories, save favorites, and rate movies."
     }
 ];
+
+// Certificates and achievements. Add future certificates to this collection.
+const certificatesData = [
+    {
+        image: 'image/certificate/programming-contest-first-place.jpg',
+        alt: 'Certificate of Appreciation for First Place in the Programming Contest Team Category during I.T. Days 2025',
+        title: 'First Place — Programming Contest',
+        category: 'Team Category',
+        event: 'I.T. Days 2025',
+        icon: 'fa-solid fa-people-group',
+        description: 'Recognized for collective programming skill, strategy, and teamwork during the I.T. Days 2025 programming competition.',
+        tags: ['Programming', 'Problem Solving', 'Teamwork']
+    },
+    {
+        image: 'image/certificate/programming-contest-first-runner-up.jpg',
+        alt: 'Certificate of Appreciation for First Runner-Up in the Programming Contest during I.T. Days 2026',
+        title: 'First Runner-Up — Programming Contest',
+        category: 'Programming Contest',
+        event: 'I.T. Days 2026',
+        icon: 'fa-solid fa-code',
+        description: 'Recognized for programming skill and outstanding performance in the I.T. Days 2026 contest.',
+        tags: ['Programming', 'Problem Solving', 'Competition']
+    },
+    {
+        image: 'image/certificate/chess-2nd-runner-up.jpg',
+        alt: 'Certificate of Appreciation for Second Runner-Up in Chess during I.T. Days 2026',
+        title: 'Second Runner-Up — Chess',
+        category: 'Chess',
+        event: 'I.T. Days 2026',
+        icon: 'fa-solid fa-chess-knight',
+        description: 'Recognized for a second runner-up finish in the I.T. Days 2026 chess competition.',
+        tags: ['Chess', 'Strategy', 'Competition']
+    },
+    {
+        image: 'image/certificate/Screenshot 2026-10-16 174729.png',
+        alt: 'HP LIFE certificate of completion for Effective Business Websites, awarded October 16, 2026',
+        title: 'Effective Business Websites',
+        category: 'HP LIFE / HP Foundation',
+        event: 'October 16, 2026',
+        icon: 'fa-solid fa-globe',
+        description: 'Completed the HP LIFE course on business website development techniques, understanding customer behavior, and using website metrics effectively.',
+        tags: ['Web Development', 'Customer Behavior', 'Website Metrics']
+    },
+    {
+        image: 'image/certificate/image.png',
+        alt: 'HP LIFE certificate of completion for Introduction to Cybersecurity Awareness, awarded October 16, 2026',
+        title: 'Introduction to Cybersecurity Awareness',
+        category: 'HP LIFE / HP Foundation',
+        event: 'October 16, 2026',
+        icon: 'fa-solid fa-shield-halved',
+        description: 'Completed the HP LIFE course on common cybersecurity threats and basic ways to keep online data and information more secure.',
+        tags: ['Cybersecurity', 'Security Awareness', 'Data Protection']
+    },
+    {
+        image: 'image/certificate/Screenshot 2026-10-16 175400.png',
+        alt: 'Cisco Networking Academy certificate for Computer Hardware Basics, completed October 16, 2026',
+        title: 'Computer Hardware Basics',
+        category: 'Cisco Networking Academy',
+        event: 'October 16, 2026',
+        icon: 'fa-solid fa-computer',
+        description: 'Successfully completed Computer Hardware Basics through the Cisco Networking Academy program.',
+        tags: ['Computer Hardware', 'IT Fundamentals', 'Cisco']
+    },
+    {
+        image: 'image/certificate/Screenshot 2026-10-16 175604.png',
+        alt: 'Cisco Networking Academy and JS Institute certificate for JavaScript Essentials 1, completed October 15, 2026',
+        title: 'JavaScript Essentials 1',
+        category: 'Cisco Networking Academy / JS Institute',
+        event: 'October 15, 2026',
+        icon: 'fa-solid fa-code',
+        description: 'Successfully completed JavaScript Essentials 1 through the Cisco Networking Academy program in collaboration with JS Institute.',
+        tags: ['JavaScript', 'Programming', 'Web Development']
+    },
+    {
+        image: 'image/certificate/Screenshot 2026-10-16 175745.png',
+        alt: 'Cisco Networking Academy and JS Institute certificate for HTML Essentials, completed October 16, 2026',
+        title: 'HTML Essentials',
+        category: 'Cisco Networking Academy / JS Institute',
+        event: 'October 16, 2026',
+        icon: 'fa-solid fa-file-code',
+        description: 'Successfully completed HTML Essentials through the Cisco Networking Academy program in collaboration with JS Institute.',
+        tags: ['HTML', 'Web Development', 'Frontend']
+    },
+    {
+        image: 'image/certificate/Screenshot 2026-10-16 175904.png',
+        alt: 'HackerRank certificate of accomplishment for C# Basic, earned October 16, 2026',
+        title: 'C# (Basic)',
+        category: 'HackerRank',
+        event: 'October 16, 2026',
+        icon: 'fa-solid fa-code',
+        description: 'Earned the HackerRank C# (Basic) Certificate of Accomplishment by passing the skill certification test.',
+        tags: ['C#', 'Programming', 'Skills Assessment']
+    },
+    {
+        image: 'image/certificate/29068333-9acc-4c95-8bdc-3bdd85435a7e.jpg',
+        alt: 'Certificate of Recognition for Most Innovative Project, awarded to the Web-based Teacher Room Tracking System with Real Time Monitoring and Classroom Visualization on April 12, 2026',
+        title: 'Most Innovative Project',
+        category: 'Capstone Research',
+        event: 'April 12, 2026',
+        icon: 'fa-solid fa-lightbulb',
+        description: 'Recognized for exceptional creativity and originality in the design and development of a web-based Teacher Room Tracking System with real-time monitoring and classroom visualization. Awarded at Pearlmont Hotel, Cagayan de Oro City.',
+        tags: ['Innovation', 'Capstone Project', 'Web Development']
+    }
+];

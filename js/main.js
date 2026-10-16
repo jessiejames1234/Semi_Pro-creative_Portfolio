@@ -489,38 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Certificate Carousel and Image Viewer ---
-    const certificates = [
-        {
-            image: 'image/certificate/programming-contest-first-place.jpg',
-            alt: 'Certificate of Appreciation for First Place in the Programming Contest Team Category during I.T. Days 2025',
-            title: 'First Place — Programming Contest',
-            category: 'Team Category',
-            event: 'I.T. Days 2025',
-            icon: 'fa-solid fa-people-group',
-            description: 'Recognized for collective programming skill, strategy, and teamwork during the I.T. Days 2025 programming competition.',
-            tags: ['Programming', 'Problem Solving', 'Teamwork']
-        },
-        {
-            image: 'image/certificate/programming-contest-first-runner-up.jpg',
-            alt: 'Certificate of Appreciation for First Runner-Up in the Programming Contest during I.T. Days 2026',
-            title: 'First Runner-Up — Programming Contest',
-            category: 'Programming Contest',
-            event: 'I.T. Days 2026',
-            icon: 'fa-solid fa-code',
-            description: 'Recognized for programming skill and outstanding performance in the I.T. Days 2026 contest.',
-            tags: ['Programming', 'Problem Solving', 'Competition']
-        },
-        {
-            image: 'image/certificate/chess-2nd-runner-up.jpg',
-            alt: 'Certificate of Appreciation for Second Runner-Up in Chess during I.T. Days 2026',
-            title: 'Second Runner-Up — Chess',
-            category: 'Chess',
-            event: 'I.T. Days 2026',
-            icon: 'fa-solid fa-chess-knight',
-            description: 'Recognized for a second runner-up finish in the I.T. Days 2026 chess competition.',
-            tags: ['Chess', 'Strategy', 'Competition']
-        }
-    ];
+    const certificates = certificatesData;
     const certificateModal = document.getElementById('certificate-modal');
     const certificateImage = document.getElementById('certificate-image');
     const certificateModalImage = document.getElementById('certificate-modal-image');
@@ -528,6 +497,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const certificateModalTitle = document.getElementById('certificate-modal-title');
     const certificateOpeners = document.querySelectorAll('[data-certificate-open]');
     const closeCertificateModalButton = document.getElementById('close-certificate-modal');
+    const certificatePicker = document.getElementById('certificate-picker');
+    certificatePicker.replaceChildren(...certificates.map((item, index) => {
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = item.title;
+        return option;
+    }));
+    document.getElementById('certificate-total').textContent = String(certificates.length);
+    certificatePicker.addEventListener('change', () => showCertificate(Number(certificatePicker.value)));
     let certificateIndex = 0;
     let certificateTimer;
     let certificateModalTrigger = null;
@@ -535,6 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCertificate(index) {
         certificateIndex = (index + certificates.length) % certificates.length;
         const item = certificates[certificateIndex];
+        certificatePicker.value = String(certificateIndex);
         certificateImage.src = item.image;
         certificateImage.alt = item.alt;
         certificateModalImage.src = item.image;
@@ -565,7 +544,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function startCertificateAutoplay() {
         window.clearInterval(certificateTimer);
         certificateTimer = window.setInterval(() => {
-            if (!document.hidden) renderCertificate(certificateIndex + 1);
+            if (!document.hidden && certificateModal.classList.contains('hidden')
+                && !document.getElementById('certificates').contains(document.activeElement)) {
+                renderCertificate(certificateIndex + 1);
+            }
         }, 5000);
     }
 
